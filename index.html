@@ -11,7 +11,7 @@
     --blue-light:#BBDEFB; --blue-pale:#E8F4FE; --sky:#4FC3F7;
     --gray-900:#1B2A3A; --gray-700:#4A5B6B; --gray-500:#8A99A8; --gray-300:#D5DEE6; --gray-100:#F2F6FA;
     --white:#FFF; --green:#2E7D32; --green-bg:#E6F4EA; --red:#D64545; --red-bg:#FDECEA;
-    --amber:#F59E0B; --violet:#7C4DFF; --teal:#00BFA5;
+    --amber:#F59E0B; --amber-bg:#FFF4DE; --violet:#7C4DFF; --violet-bg:#EFE9FF; --teal:#00BFA5;
     --shadow:0 6px 18px rgba(21,101,192,.10); --radius:16px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -83,28 +83,31 @@
   .cell-topic .sub{font-size:12px;color:var(--gray-500);margin-top:4px;max-width:320px;}
   .cat-badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11.5px;font-weight:600;color:#fff;white-space:nowrap;}
   .status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:14px;font-size:12px;font-weight:600;white-space:nowrap;}
-  .status-pill.done{background:var(--green-bg);color:var(--green);}
-  .status-pill.fail{background:var(--red-bg);color:var(--red);}
-  .status-pill .dot{width:7px;height:7px;border-radius:50%;}
-  .status-pill.done .dot{background:var(--green);}
-  .status-pill.fail .dot{background:var(--red);}
+  .status-pill .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  .status-pill.done{background:var(--green-bg);color:var(--green);} .status-pill.done .dot{background:var(--green);}
+  .status-pill.fail{background:var(--red-bg);color:var(--red);} .status-pill.fail .dot{background:var(--red);}
+  .status-pill.prog{background:var(--violet-bg);color:#5E35B1;} .status-pill.prog .dot{background:#7C4DFF;animation:pulseDot 1.3s infinite;}
+  .status-pill.recv{background:var(--amber-bg);color:#B26A00;} .status-pill.recv .dot{background:var(--amber);animation:pulseDot 1.3s infinite;}
+  .status-pill.other{background:var(--gray-100);color:var(--gray-700);} .status-pill.other .dot{background:var(--gray-500);}
+  @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.45);opacity:.45;}}
 
   .pagination-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:14px 24px;border-top:1px solid var(--gray-100);font-size:13px;color:var(--gray-500);}
   .page-btns button{width:32px;height:32px;border-radius:8px;border:1px solid var(--gray-300);background:#fff;cursor:pointer;font-size:15px;color:var(--gray-700);margin-left:6px;transition:.2s;}
   .page-btns button:hover:not(:disabled){background:var(--blue-light);border-color:var(--blue);}
   .page-btns button:disabled{opacity:.4;cursor:not-allowed;}
 
-  .registry-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--gray-100);border-top:1px solid var(--gray-100);}
-  .rsum-card{background:#fff;padding:18px 14px;text-align:center;}
-  .rsum-val{font-family:'Kanit';font-weight:700;font-size:22px;color:var(--blue-dark);}
+  .registry-summary{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--gray-100);border-top:1px solid var(--gray-100);}
+  .rsum-card{background:#fff;padding:18px 10px;text-align:center;}
+  .rsum-val{font-family:'Kanit';font-weight:700;font-size:21px;color:var(--blue-dark);}
   .rsum-val.green{color:var(--green);} .rsum-val.red{color:var(--red);} .rsum-val.sky{color:var(--blue);}
-  .rsum-label{font-size:11.5px;color:var(--gray-700);margin-top:4px;font-weight:600;}
+  .rsum-val.violet{color:#5E35B1;} .rsum-val.amber{color:#D98B04;}
+  .rsum-label{font-size:11px;color:var(--gray-700);margin-top:4px;font-weight:600;line-height:1.35;}
   .rsum-sub{font-size:10.5px;color:var(--gray-500);margin-top:2px;}
-  @media(max-width:900px){.registry-summary{grid-template-columns:repeat(3,1fr);}}
-  @media(max-width:560px){.registry-summary{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:1150px){.registry-summary{grid-template-columns:repeat(4,1fr);}}
+  @media(max-width:620px){.registry-summary{grid-template-columns:repeat(2,1fr);}}
 
-  /* ============ EXECUTIVE DASHBOARD ============ */
-  .dash{max-width:1300px;margin:0 auto 50px;padding:0 24px;}
+  /* ============ DASHBOARD ============ */
+  .dash{max-width:1300px;margin:0 auto 40px;padding:0 24px;}
   .dash-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:20px;}
   .dash-head h2{font-family:'Kanit';font-weight:600;font-size:23px;display:flex;align-items:center;gap:10px;}
   .dash-head h2::before{content:"";width:6px;height:27px;background:linear-gradient(180deg,var(--sky),var(--blue-deep));border-radius:4px;}
@@ -113,27 +116,6 @@
   .live-badge .ldot{width:9px;height:9px;border-radius:50%;background:#2E7D32;animation:blink 1.2s infinite;}
   @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,125,50,.55);}50%{opacity:.35;box-shadow:0 0 0 7px rgba(46,125,50,0);}}
 
-  /* KPI STRIP */
-  .dash-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:22px;}
-  .kpi{position:relative;background:#fff;border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow);overflow:hidden;transition:.3s;}
-  .kpi::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.65) 50%,transparent 70%);transform:translateX(-120%);}
-  .kpi:hover::after{animation:sheen 1s ease;}
-  @keyframes sheen{to{transform:translateX(120%);}}
-  .kpi:hover{transform:translateY(-7px);box-shadow:0 16px 32px rgba(21,101,192,.18);}
-  .kpi .bar{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--sky),var(--blue-deep));}
-  .kpi.k2 .bar{background:linear-gradient(90deg,#80DEEA,var(--teal));}
-  .kpi.k3 .bar{background:linear-gradient(90deg,#FFD54F,var(--amber));}
-  .kpi.k4 .bar{background:linear-gradient(90deg,#A5D6A7,var(--green));}
-  .kpi.k5 .bar{background:linear-gradient(90deg,#B39DDB,var(--violet));}
-  .kpi.k6 .bar{background:linear-gradient(90deg,#90CAF9,var(--blue-dark));}
-  .kpi .ic{font-size:22px;margin-bottom:7px;display:block;}
-  .kpi .v{font-family:'Kanit';font-weight:700;font-size:28px;line-height:1.15;color:var(--blue-deep);}
-  .kpi.k2 .v{color:#00897B;} .kpi.k3 .v{color:#D98B04;} .kpi.k4 .v{color:var(--green);} .kpi.k5 .v{color:#5E35B1;}
-  .kpi .u{font-size:12px;font-weight:400;color:var(--gray-500);margin-left:4px;}
-  .kpi .l{font-size:12px;color:var(--gray-700);margin-top:5px;font-weight:600;}
-  .kpi .s{font-size:11px;color:var(--gray-500);margin-top:2px;}
-
-  /* PANELS */
   .panel{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:22px;}
   .panel-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:6px;}
   .panel-title{font-family:'Kanit';font-weight:600;font-size:16px;display:flex;align-items:center;gap:8px;}
@@ -143,7 +125,6 @@
   .mtab:hover{border-color:var(--blue);color:var(--blue-dark);}
   .mtab.active{background:linear-gradient(135deg,var(--blue),var(--blue-deep));color:#fff;border-color:transparent;box-shadow:0 5px 14px rgba(21,101,192,.32);}
 
-  /* BAR CHART */
   .chart-wrap{position:relative;padding:26px 0 0;}
   .chart-grid{position:absolute;inset:26px 0 42px 0;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none;}
   .chart-grid span{border-top:1px dashed #E3EBF3;height:0;}
@@ -153,9 +134,9 @@
   .bar-col.show .bar-val{opacity:1;}
   .bar-fill{width:100%;max-width:64px;height:0;border-radius:9px 9px 4px 4px;background:linear-gradient(180deg,var(--sky),var(--blue));transition:height 1s cubic-bezier(.22,1,.36,1),filter .25s,transform .25s;}
   .bar-col:hover .bar-fill{filter:brightness(1.12) saturate(1.2);transform:scaleY(1.02);}
-  .bar-fill.top{background:linear-gradient(180deg,#FFD166,var(--amber));box-shadow:0 0 0 0 rgba(245,158,11,.55);animation:pulseAmber 2s infinite;}
+  .bar-fill.top{background:linear-gradient(180deg,#FFD166,var(--amber));animation:pulseAmber 2s infinite;}
   @keyframes pulseAmber{0%{box-shadow:0 0 0 0 rgba(245,158,11,.5);}70%{box-shadow:0 0 0 13px rgba(245,158,11,0);}100%{box-shadow:0 0 0 0 rgba(245,158,11,0);}}
-  .bar-fill.latest{background:linear-gradient(180deg,#69F0AE,#00A76F);box-shadow:0 0 0 0 rgba(0,167,111,.5);animation:pulseGreen 2s infinite;}
+  .bar-fill.latest{background:linear-gradient(180deg,#69F0AE,#00A76F);animation:pulseGreen 2s infinite;}
   @keyframes pulseGreen{0%{box-shadow:0 0 0 0 rgba(0,167,111,.5);}70%{box-shadow:0 0 0 13px rgba(0,167,111,0);}100%{box-shadow:0 0 0 0 rgba(0,167,111,0);}}
   .bar-x{font-size:11px;color:var(--gray-500);margin-top:9px;white-space:nowrap;text-align:center;height:34px;line-height:1.35;}
   .bar-x b{display:block;color:var(--gray-700);font-weight:600;}
@@ -164,14 +145,34 @@
   .chart-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:11.5px;color:var(--gray-500);}
   .chart-legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;}
 
-  /* SPLIT ROW */
   .dash-split{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;margin-bottom:22px;}
   @media(max-width:980px){.dash-split{grid-template-columns:1fr;}}
-  .spark-svg{width:100%;height:210px;display:block;overflow:visible;}
-  .spark-svg .ln{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2200;stroke-dashoffset:2200;animation:draw 2.1s ease forwards;}
-  @keyframes draw{to{stroke-dashoffset:0;}}
-  .spark-svg .pt{opacity:0;animation:fadeIn .5s 1.5s forwards;}
-  @keyframes fadeIn{to{opacity:1;}}
+
+  /* MONEY PANEL */
+  .money-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px;}
+  @media(max-width:700px){.money-grid{grid-template-columns:1fr;}}
+  .money-card{border:1px solid var(--gray-100);border-radius:13px;padding:16px 17px;transition:.25s;position:relative;overflow:hidden;}
+  .money-card:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(21,101,192,.13);}
+  .money-card .mc-t{font-size:12.5px;color:var(--gray-700);font-weight:600;}
+  .money-card .mc-v{font-family:'Kanit';font-weight:700;font-size:29px;line-height:1.25;margin-top:4px;}
+  .money-card .mc-u{font-size:14px;font-weight:400;color:var(--gray-500);margin-left:4px;}
+  .money-card .mc-f{font-size:11.5px;color:var(--gray-500);margin-top:3px;}
+  .money-card.m1{border-left:5px solid var(--blue);} .money-card.m1 .mc-v{color:var(--blue-dark);}
+  .money-card.m2{border-left:5px solid var(--teal);} .money-card.m2 .mc-v{color:#00897B;}
+  .money-card.m3{border-left:5px solid var(--blue-deep);background:linear-gradient(135deg,#E8F4FE,#F4FAFF);}
+  .money-card.m3 .mc-v{color:var(--blue-deep);font-size:32px;}
+  .money-card.m3::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.75) 50%,transparent 65%);transform:translateX(-120%);animation:sweep 3.4s infinite;}
+  @keyframes sweep{0%{transform:translateX(-120%);}55%,100%{transform:translateX(120%);}}
+
+  .mbar-row{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+  .mbar-lbl{font-size:12px;color:var(--gray-700);font-weight:600;width:82px;flex-shrink:0;text-align:right;}
+  .mbar-track{flex:1;height:44px;background:var(--gray-100);border-radius:8px;display:flex;overflow:hidden;}
+  .mbar-seg{height:100%;width:0;transition:width 1.5s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;color:#fff;font-family:'Kanit';font-size:12px;font-weight:600;white-space:nowrap;}
+  .mbar-seg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:shine 2.8s infinite;}
+  @keyframes shine{0%{transform:translateX(-100%);}60%,100%{transform:translateX(230%);}}
+  .mbar-seg.s1{background:linear-gradient(90deg,#42A5F5,#1565C0);}
+  .mbar-seg.s2{background:linear-gradient(90deg,#4DD0C4,#00897B);}
+  .maxis{display:flex;justify-content:space-between;margin-left:96px;font-size:10.5px;color:var(--gray-500);margin-top:2px;}
 
   .gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0 4px;}
   .gauge{position:relative;width:190px;height:190px;}
@@ -179,12 +180,11 @@
   .gauge .ring{fill:none;stroke:#EDF3F9;stroke-width:16;}
   .gauge .prog{fill:none;stroke:url(#gaugeGrad);stroke-width:16;stroke-linecap:round;transition:stroke-dashoffset 1.8s cubic-bezier(.22,1,.36,1);}
   .gauge .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-  .gauge .mid .big{font-family:'Kanit';font-weight:700;font-size:38px;color:var(--green);line-height:1;}
+  .gauge .mid .big{font-family:'Kanit';font-weight:700;font-size:36px;color:var(--green);line-height:1;}
   .gauge .mid .cap{font-size:11.5px;color:var(--gray-500);margin-top:5px;}
   .gauge-note{margin-top:12px;text-align:center;font-size:12px;color:var(--gray-700);}
   .gauge-note b{color:var(--green);}
 
-  /* CATEGORY */
   .cat-list{display:flex;flex-direction:column;gap:13px;margin-top:6px;}
   .cat-row .cat-top{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px;gap:10px;}
   .cat-row .cat-top .nm{color:var(--gray-700);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -192,9 +192,7 @@
   .cat-track{height:11px;border-radius:8px;background:var(--gray-100);overflow:hidden;}
   .cat-bar{height:100%;width:0;border-radius:8px;transition:width 1.3s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;}
   .cat-bar::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-100%);animation:shine 2.6s infinite;}
-  @keyframes shine{0%{transform:translateX(-100%);}60%,100%{transform:translateX(200%);}}
 
-  /* INSIGHT CARDS */
   .insight-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
   .insight-head select{padding:9px 14px;border:1.5px solid var(--blue-light);border-radius:20px;font-size:13px;font-family:'Sarabun';background:var(--blue-pale);color:var(--blue-deep);font-weight:600;outline:none;cursor:pointer;}
   .insight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
@@ -205,7 +203,6 @@
   .ins-card.c2 h5{color:#B26A00;} .ins-card.c3 h5{color:#5E35B1;} .ins-card.c4 h5{color:var(--green);}
   .ins-card p{font-size:13px;color:var(--gray-700);line-height:1.75;}
 
-  /* MONTH TABLE */
   .mtable{width:100%;border-collapse:collapse;font-size:12.5px;min-width:880px;}
   .mtable thead th{background:var(--blue-pale);color:var(--blue-deep);font-family:'Kanit';font-size:12px;font-weight:600;padding:11px 13px;text-align:right;white-space:nowrap;border-bottom:2px solid var(--blue-light);}
   .mtable thead th:first-child{text-align:left;}
@@ -220,20 +217,52 @@
   .delta.down{background:var(--red-bg);color:var(--red);}
   .delta.flat{background:var(--gray-100);color:var(--gray-500);}
 
-  .dash-note{font-size:11.5px;color:var(--gray-500);text-align:right;margin-top:-8px;}
+  /* KPI STRIP (moved to bottom) */
+  .kpi-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 16px;}
+  .kpi-head h3{font-family:'Kanit';font-weight:600;font-size:19px;display:flex;align-items:center;gap:9px;}
+  .kpi-head .tagline{font-size:12.5px;color:var(--gray-500);}
+  .dash-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:16px;}
+  .kpi{position:relative;background:#fff;border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow);overflow:hidden;transition:.3s;}
+  .kpi::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.65) 50%,transparent 70%);transform:translateX(-120%);}
+  .kpi:hover::after{animation:sheen 1s ease;}
+  @keyframes sheen{to{transform:translateX(120%);}}
+  .kpi:hover{transform:translateY(-7px);box-shadow:0 16px 32px rgba(21,101,192,.18);}
+  .kpi .bar{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--sky),var(--blue-deep));background-size:200% 100%;animation:flow 3s linear infinite;}
+  @keyframes flow{to{background-position:200% 0;}}
+  .kpi.k2 .bar{background:linear-gradient(90deg,#80DEEA,var(--teal),#80DEEA);background-size:200% 100%;}
+  .kpi.k3 .bar{background:linear-gradient(90deg,#FFD54F,var(--amber),#FFD54F);background-size:200% 100%;}
+  .kpi.k4 .bar{background:linear-gradient(90deg,#A5D6A7,var(--green),#A5D6A7);background-size:200% 100%;}
+  .kpi.k5 .bar{background:linear-gradient(90deg,#B39DDB,var(--violet),#B39DDB);background-size:200% 100%;}
+  .kpi.k6 .bar{background:linear-gradient(90deg,#90CAF9,var(--blue-dark),#90CAF9);background-size:200% 100%;}
+  .kpi.k7 .bar{background:linear-gradient(90deg,#F48FB1,#EC407A,#F48FB1);background-size:200% 100%;}
+  .kpi .ic{font-size:22px;margin-bottom:7px;display:block;}
+  .kpi .v{font-family:'Kanit';font-weight:700;font-size:28px;line-height:1.15;color:var(--blue-deep);}
+  .kpi.k2 .v{color:#00897B;} .kpi.k3 .v{color:#D98B04;} .kpi.k4 .v{color:var(--green);} .kpi.k5 .v{color:#5E35B1;} .kpi.k7 .v{color:#D81B60;}
+  .kpi .l{font-size:12px;color:var(--gray-700);margin-top:5px;font-weight:600;}
+  .kpi .s{font-size:11px;color:var(--gray-500);margin-top:2px;}
 
-  /* STATS */
-  .stats-section{max-width:1300px;margin:40px auto;padding:0 24px;}
-  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;}
-  .stat-card{background:#fff;border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow);border-top:4px solid var(--blue);transition:.25s;text-align:center;}
-  .stat-card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(21,101,192,.16);}
-  .stat-card .icon{font-size:30px;margin-bottom:8px;}
-  .stat-card .value{font-family:'Kanit';font-weight:700;font-size:26px;}
-  .stat-card .label{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
-  .stat-card.hl{border-top-color:var(--blue-deep);}
-  .stat-card.hl .value{color:var(--blue-dark);}
+  /* LOOKER LINK BAND */
+  .looker-band{max-width:1300px;margin:0 auto 46px;padding:26px 24px;border-radius:var(--radius);background:linear-gradient(120deg,#0D47A1,#1565C0 55%,#1E88E5);box-shadow:0 12px 30px rgba(13,71,161,.28);position:relative;overflow:hidden;}
+  .looker-band::before{content:"";position:absolute;top:-60%;left:-20%;width:60%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.10),transparent);transform:rotate(18deg);animation:bandSweep 6s linear infinite;}
+  @keyframes bandSweep{0%{left:-30%;}100%{left:120%;}}
+  .looker-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px;position:relative;}
+  .looker-head h3{font-family:'Kanit';font-size:18px;font-weight:600;color:#fff;display:flex;align-items:center;gap:9px;}
+  .looker-head p{font-size:12.5px;color:#C7E1F8;margin-top:4px;}
+  .looker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;position:relative;}
+  .lk-card{display:block;background:rgba(255,255,255,.10);border:1.5px solid rgba(255,255,255,.24);border-radius:13px;padding:18px 18px;transition:.28s;backdrop-filter:blur(3px);}
+  .lk-card:hover{background:#fff;border-color:#fff;transform:translateY(-6px);box-shadow:0 14px 28px rgba(0,0,0,.24);}
+  .lk-card .lk-ic{width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:11px;transition:.28s;}
+  .lk-card:hover .lk-ic{background:var(--blue-pale);}
+  .lk-card .lk-t{font-family:'Kanit';font-size:15px;font-weight:600;color:#fff;transition:.28s;}
+  .lk-card .lk-d{font-size:12px;color:#C7E1F8;margin-top:5px;line-height:1.6;transition:.28s;}
+  .lk-card .lk-go{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.5px;font-weight:600;color:#8ECBFF;transition:.28s;}
+  .lk-card:hover .lk-t{color:var(--blue-deep);}
+  .lk-card:hover .lk-d{color:var(--gray-700);}
+  .lk-card:hover .lk-go{color:var(--blue-dark);}
 
-  .section-head{max-width:1300px;margin:52px auto 20px;padding:0 24px;}
+  .dash-note{font-size:11.5px;color:var(--gray-500);text-align:right;margin-top:-8px;margin-bottom:26px;}
+
+  .section-head{max-width:1300px;margin:20px auto 20px;padding:0 24px;}
   .section-head h2{font-family:'Kanit';font-weight:600;font-size:22px;display:flex;align-items:center;gap:10px;}
   .section-head h2::before{content:"";width:6px;height:26px;background:var(--blue);border-radius:4px;}
   .section-head p{color:var(--gray-500);font-size:13.5px;margin-top:8px;margin-left:16px;}
@@ -254,7 +283,6 @@
   .quick-card:nth-child(3) .btn-go{background:var(--blue-deep);}
   .btn-go:hover{opacity:.85;}
 
-  /* FOOTER */
   footer{background:var(--blue-deep);color:#D6E6F5;padding:40px 24px 22px;}
   .footer-inner{max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;}
   .footer-col{flex:1 1 260px;}
@@ -263,7 +291,6 @@
   .qr-box{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px 16px;transition:.25s;}
   .qr-box:hover{background:rgba(255,255,255,.16);transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.22);}
   .qr-box img{width:112px;height:112px;background:#fff;padding:7px;border-radius:10px;display:block;flex-shrink:0;}
-  .qr-text{display:block;}
   .qr-text .line1{display:block;font-family:'Kanit';font-size:13.5px;font-weight:600;color:#fff;line-height:1.5;margin-bottom:5px;}
   .qr-text .line2{display:block;font-family:'Kanit';font-size:15px;font-weight:600;color:#8ECBFF;line-height:1.45;}
   .qr-text .line3{display:block;font-size:11.5px;color:#B7D6EF;line-height:1.6;margin-top:8px;}
@@ -288,13 +315,10 @@
     <div class="nav-links">
       <a href="#registry" class="active">📋 ทะเบียนงานบริการ</a>
       <a href="#dashboard">📊 แดชบอร์ดผู้บริหาร</a>
-      <a href="#quickaccess">🔗 บริการอื่น ๆ</a>
+      <a href="#looker">🔗 รายงาน Looker</a>
       <a class="nav-qr" href="https://docs.google.com/forms/d/e/1FAIpQLScyGClAdAnwhysYFL5M6BY8cy-SSrKegPAJtYHp0KDZPRstfg/viewform" target="_blank" rel="noopener" title="แบบฟอร์มขอรับบริการโสตทัศนูปกรณ์">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLScyGClAdAnwhysYFL5M6BY8cy-SSrKegPAJtYHp0KDZPRstfg%2Fviewform" alt="QR แบบฟอร์มขอรับบริการ">
-        <span>
-          <span class="t1">แบบฟอร์มขอรับบริการ</span><br>
-          <span class="t2">สแกน QR หรือคลิกที่รูป</span>
-        </span>
+        <span><span class="t1">แบบฟอร์มขอรับบริการ</span><br><span class="t2">สแกน QR หรือคลิกที่รูป</span></span>
       </a>
     </div>
   </div>
@@ -321,8 +345,10 @@
         <select id="catFilter" onchange="applyFilters()"><option value="all">ทุกประเภทงาน</option></select>
         <select id="statusFilter" onchange="applyFilters()">
           <option value="all">ทุกสถานะ</option>
-          <option value="สำเร็จ">✅ สำเร็จ</option>
-          <option value="ไม่สำเร็จ">❌ ไม่สำเร็จ</option>
+          <option value="done">✅ สำเร็จ</option>
+          <option value="prog">🔄 อยู่ระหว่างดำเนินการ</option>
+          <option value="recv">📥 รับเรื่องไว้ก่อน</option>
+          <option value="fail">❌ ไม่สำเร็จ</option>
         </select>
         <button class="btn-sync" id="syncBtn" onclick="manualSync()"><span class="ic">🔄</span><span id="syncLabel">ซิงก์ข้อมูลล่าสุด</span></button>
         <button class="btn-csv" onclick="exportCSV()">⬇ CSV</button>
@@ -337,32 +363,29 @@
           <th>เลขที่</th><th>เรื่อง</th><th>วันที่ให้บริการ</th><th>ห้อง/สถานที่</th>
           <th>ระยะเวลา (นาที)</th><th>ภาระงาน (หน่วย)</th><th>สถานะ</th><th>หมายเหตุ</th>
         </tr></thead>
-        <tbody id="registryBody">
-          <tr><td colspan="8" style="text-align:center;padding:40px;color:#8A99A8;">⏳ กำลังโหลดข้อมูล...</td></tr>
-        </tbody>
+        <tbody id="registryBody"><tr><td colspan="8" style="text-align:center;padding:40px;color:#8A99A8;">⏳ กำลังโหลดข้อมูล...</td></tr></tbody>
       </table>
     </div>
 
     <div class="pagination-bar">
       <span id="pageInfo">0 - 0 / 0</span>
-      <div class="page-btns">
-        <button id="prevBtn" onclick="prevPage()">‹</button>
-        <button id="nextBtn" onclick="nextPage()">›</button>
-      </div>
+      <div class="page-btns"><button id="prevBtn" onclick="prevPage()">‹</button><button id="nextBtn" onclick="nextPage()">›</button></div>
     </div>
 
     <div class="registry-summary">
       <div class="rsum-card"><div class="rsum-val" id="sTotal">0</div><div class="rsum-label">ทั้งหมด</div><div class="rsum-sub">รายการ</div></div>
       <div class="rsum-card"><div class="rsum-val green" id="sDone">0</div><div class="rsum-label">สำเร็จ</div><div class="rsum-sub" id="sDonePct">0%</div></div>
+      <div class="rsum-card"><div class="rsum-val violet" id="sProg">0</div><div class="rsum-label">อยู่ระหว่างดำเนินการ</div><div class="rsum-sub" id="sProgPct">0%</div></div>
+      <div class="rsum-card"><div class="rsum-val amber" id="sRecv">0</div><div class="rsum-label">รับเรื่องไว้ก่อน</div><div class="rsum-sub" id="sRecvPct">0%</div></div>
       <div class="rsum-card"><div class="rsum-val red" id="sFail">0</div><div class="rsum-label">ไม่สำเร็จ</div><div class="rsum-sub" id="sFailPct">0%</div></div>
-      <div class="rsum-card"><div class="rsum-val sky" id="sRate">0%</div><div class="rsum-label">อัตราความสำเร็จ</div><div class="rsum-sub">เฉลี่ยรวม</div></div>
+      <div class="rsum-card"><div class="rsum-val sky" id="sRate">0%</div><div class="rsum-label">อัตราความสำเร็จ</div><div class="rsum-sub">ของงานที่ปิดสถานะแล้ว</div></div>
       <div class="rsum-card"><div class="rsum-val sky" id="sWorkload">0</div><div class="rsum-label">ภาระงานรวม</div><div class="rsum-sub">หน่วย</div></div>
       <div class="rsum-card"><div class="rsum-val" id="sAvgTime">0</div><div class="rsum-label">เวลาเฉลี่ย/ครั้ง</div><div class="rsum-sub">นาที</div></div>
     </div>
   </div>
 </div>
 
-<!-- ================= EXECUTIVE DASHBOARD ================= -->
+<!-- ============ DASHBOARD ============ -->
 <section class="dash" id="dashboard">
   <div class="dash-head">
     <div>
@@ -372,17 +395,6 @@
     <span class="live-badge"><span class="ldot"></span> LIVE DATA · <span id="dashPeriod">กำลังโหลด</span></span>
   </div>
 
-  <!-- KPI STRIP -->
-  <div class="dash-kpis">
-    <div class="kpi k1"><span class="bar"></span><span class="ic">🛠️</span><div class="v" data-cnt id="dTotal">0</div><div class="l">การให้บริการสะสม</div><div class="s">ครั้ง · ตลอดช่วงดำเนินงาน</div></div>
-    <div class="kpi k2"><span class="bar"></span><span class="ic">📦</span><div class="v" data-cnt id="dWork">0</div><div class="l">ภาระงานรวมสะสม</div><div class="s">หน่วยภาระงาน</div></div>
-    <div class="kpi k3"><span class="bar"></span><span class="ic">⏱️</span><div class="v" data-cnt id="dHours">0</div><div class="l">เวลาปฏิบัติงานรวม</div><div class="s">ชั่วโมง</div></div>
-    <div class="kpi k4"><span class="bar"></span><span class="ic">✅</span><div class="v" id="dRate">0%</div><div class="l">อัตราความสำเร็จเฉลี่ย</div><div class="s" id="dRateSub">–</div></div>
-    <div class="kpi k5"><span class="bar"></span><span class="ic">🚀</span><div class="v" data-cnt id="dSaved">0</div><div class="l">เวลาที่ประหยัดได้สะสม</div><div class="s">ชั่วโมง เทียบระบบเอกสารเดิม</div></div>
-    <div class="kpi k6"><span class="bar"></span><span class="ic">🌱</span><div class="v" data-cnt id="dPaper">0</div><div class="l">กระดาษที่ลดการใช้</div><div class="s">แผ่น · ลดคาร์บอนฟุตพรินต์</div></div>
-  </div>
-
-  <!-- MAIN BAR CHART -->
   <div class="panel">
     <div class="panel-top">
       <div>
@@ -403,26 +415,35 @@
     </div>
   </div>
 
-  <!-- SPLIT: cumulative + gauge -->
   <div class="dash-split">
+    <!-- MONEY VALUE PANEL -->
     <div class="panel" style="margin-bottom:0;">
-      <div class="panel-title">🌊 ผลลัพธ์สะสมของการเปลี่ยนผ่านสู่ระบบดิจิทัล</div>
-      <div class="panel-sub">เวลาที่ประหยัดได้สะสม (ชั่วโมง) และกระดาษที่ลดการใช้สะสม (แผ่น)</div>
-      <svg class="spark-svg" id="areaChart" viewBox="0 0 800 210" preserveAspectRatio="none"></svg>
+      <div class="panel-title">💰 มูลค่าสะสมที่ประหยัดได้จากการเปลี่ยนผ่านสู่ระบบดิจิทัล (บาท)</div>
+      <div class="panel-sub">คำนวณจากต้นทุนแรงงานเฉลี่ย 300 บาท/ชั่วโมง และต้นทุนกระดาษรวมหมึก-การพิมพ์-การจัดเก็บ 3 บาท/แผ่น</div>
+      <div class="money-grid">
+        <div class="money-card m1"><div class="mc-t">มูลค่าจากเวลาที่ประหยัด</div><div class="mc-v" id="mvTime">0<span class="mc-u">บาท</span></div><div class="mc-f" id="mfTime">– ชม. × 300 บาท/ชม.</div></div>
+        <div class="money-card m2"><div class="mc-t">มูลค่าจากกระดาษที่ลดใช้</div><div class="mc-v" id="mvPaper">0<span class="mc-u">บาท</span></div><div class="mc-f" id="mfPaper">– แผ่น × 3 บาท/แผ่น</div></div>
+        <div class="money-card m3"><div class="mc-t">มูลค่ารวมสะสม</div><div class="mc-v" id="mvTotal">0<span class="mc-u">บาท</span></div><div class="mc-f">รวมทั้งสองรายการ</div></div>
+      </div>
+      <div class="mbar-row">
+        <div class="mbar-lbl">มูลค่าสะสม</div>
+        <div class="mbar-track"><div class="mbar-seg s1" id="segTime"></div><div class="mbar-seg s2" id="segPaper"></div></div>
+      </div>
+      <div class="maxis" id="moneyAxis"></div>
       <div class="chart-legend">
-        <span><i style="background:#1E88E5;"></i>เวลาที่ประหยัดสะสม (ชม.)</span>
-        <span><i style="background:#00BFA5;"></i>กระดาษที่ลดสะสม (แผ่น)</span>
+        <span><i style="background:#1565C0;"></i>เวลาที่ประหยัด</span>
+        <span><i style="background:#00897B;"></i>กระดาษที่ลดใช้</span>
+        <span id="moneyPerMonth">·</span>
       </div>
     </div>
+
     <div class="panel" style="margin-bottom:0;">
       <div class="panel-title">🎯 คุณภาพการให้บริการ</div>
       <div class="panel-sub">อัตราความสำเร็จของงานเฉลี่ยทั้งช่วงดำเนินงาน</div>
       <div class="gauge-wrap">
         <div class="gauge">
           <svg width="190" height="190" viewBox="0 0 190 190">
-            <defs><linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#69F0AE"/><stop offset="100%" stop-color="#1B8E4F"/>
-            </linearGradient></defs>
+            <defs><linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#69F0AE"/><stop offset="100%" stop-color="#1B8E4F"/></linearGradient></defs>
             <circle class="ring" cx="95" cy="95" r="78"/>
             <circle class="prog" id="gaugeProg" cx="95" cy="95" r="78" stroke-dasharray="490" stroke-dashoffset="490"/>
           </svg>
@@ -433,14 +454,12 @@
     </div>
   </div>
 
-  <!-- CATEGORY MIX -->
   <div class="panel">
     <div class="panel-title">🧩 สัดส่วนประเภทงานบริการ (จากทะเบียนงานจริง)</div>
     <div class="panel-sub">จัดอันดับตามจำนวนครั้งที่ให้บริการ — สะท้อนภาระงานที่แท้จริงของหน่วยงาน</div>
     <div class="cat-list" id="catList"></div>
   </div>
 
-  <!-- INSIGHT -->
   <div class="panel">
     <div class="insight-head">
       <div>
@@ -452,7 +471,6 @@
     <div class="insight-grid" id="insightGrid"></div>
   </div>
 
-  <!-- MONTH TABLE -->
   <div class="panel">
     <div class="panel-top">
       <div>
@@ -465,27 +483,59 @@
       <table class="mtable">
         <thead><tr>
           <th>เดือน</th><th>ให้บริการ (ครั้ง)</th><th>ภาระงาน (หน่วย)</th><th>เวลารวม (ชม.)</th>
-          <th>เฉลี่ย/ครั้ง (นาที)</th><th>สำเร็จ (%)</th><th>เปลี่ยนแปลง</th><th>ลดเวลา (ชม.)</th><th>ลดกระดาษ (แผ่น)</th>
+          <th>เฉลี่ย/ครั้ง (นาที)</th><th>สำเร็จ (%)</th><th>เปลี่ยนแปลง</th><th>ลดเวลา (ชม.)</th><th>ลดกระดาษ (แผ่น)</th><th>มูลค่าที่ประหยัด (บาท)</th>
         </tr></thead>
-        <tbody id="monthBody"><tr><td colspan="9" style="text-align:center;padding:34px;color:#8A99A8;">⏳ กำลังโหลด...</td></tr></tbody>
+        <tbody id="monthBody"><tr><td colspan="10" style="text-align:center;padding:34px;color:#8A99A8;">⏳ กำลังโหลด...</td></tr></tbody>
         <tfoot id="monthFoot"></tfoot>
       </table>
     </div>
   </div>
+
+  <!-- ===== KPI STRIP (ย้ายมาไว้ท้ายตารางรายเดือน) ===== -->
+  <div class="kpi-head">
+    <h3>🏆 สรุปภาพรวมผลการดำเนินงานสะสม</h3>
+    <span class="tagline">· ตัวเลขรวมทุกเดือนจากฐานข้อมูลจริง</span>
+  </div>
+  <div class="dash-kpis">
+    <div class="kpi k1"><span class="bar"></span><span class="ic">🛠️</span><div class="v" id="dTotal">0</div><div class="l">การให้บริการสะสม</div><div class="s">ครั้ง · ตลอดช่วงดำเนินงาน</div></div>
+    <div class="kpi k2"><span class="bar"></span><span class="ic">📦</span><div class="v" id="dWork">0</div><div class="l">ภาระงานรวมสะสม</div><div class="s">หน่วยภาระงาน</div></div>
+    <div class="kpi k3"><span class="bar"></span><span class="ic">⏱️</span><div class="v" id="dHours">0</div><div class="l">เวลาปฏิบัติงานรวม</div><div class="s">ชั่วโมง</div></div>
+    <div class="kpi k4"><span class="bar"></span><span class="ic">✅</span><div class="v" id="dRate">0%</div><div class="l">อัตราความสำเร็จเฉลี่ย</div><div class="s" id="dRateSub">–</div></div>
+    <div class="kpi k5"><span class="bar"></span><span class="ic">🚀</span><div class="v" id="dSaved">0</div><div class="l">เวลาที่ประหยัดได้สะสม</div><div class="s">ชั่วโมง เทียบระบบเอกสารเดิม</div></div>
+    <div class="kpi k6"><span class="bar"></span><span class="ic">🌱</span><div class="v" id="dPaper">0</div><div class="l">กระดาษที่ลดการใช้</div><div class="s">แผ่น · ลดคาร์บอนฟุตพรินต์</div></div>
+    <div class="kpi k7"><span class="bar"></span><span class="ic">📊</span><div class="v" id="dAvgW">0</div><div class="l">ค่าเฉลี่ยภาระงาน</div><div class="s">หน่วย/ครั้ง · ความหนักเบาเฉลี่ยของงาน</div></div>
+  </div>
   <p class="dash-note">ข้อมูลทั้งหมดคำนวณจากฐานข้อมูลจริงของระบบ DWMS · ปรับปรุงอัตโนมัติทุกครั้งที่มีการบันทึกงานใหม่</p>
 </section>
 
-<section class="stats-section">
-  <div class="stats-grid">
-    <div class="stat-card hl"><div class="icon">🛠️</div><div class="value" id="kTotal">–</div><div class="label">จำนวนการให้บริการรวม (ครั้ง)</div></div>
-    <div class="stat-card"><div class="icon">📦</div><div class="value" id="kWorkload">–</div><div class="label">ภาระงานรวม (หน่วย)</div></div>
-    <div class="stat-card"><div class="icon">📈</div><div class="value" id="kAvgW">–</div><div class="label">ค่าเฉลี่ยภาระงาน (หน่วย/ครั้ง)</div></div>
-    <div class="stat-card hl"><div class="icon">⏱️</div><div class="value" id="kHours">–</div><div class="label">เวลาปฏิบัติงานรวม (ชั่วโมง)</div></div>
-    <div class="stat-card"><div class="icon">✅</div><div class="value" id="kRate">–</div><div class="label">อัตราความสำเร็จเฉลี่ย</div></div>
-    <div class="stat-card"><div class="icon">🚀</div><div class="value" id="kSaved">–</div><div class="label">เวลาที่ลดได้สะสม (ชั่วโมง)</div></div>
-    <div class="stat-card hl"><div class="icon">🌱</div><div class="value" id="kPaper">–</div><div class="label">จำนวนกระดาษที่ลดการใช้ (แผ่น)</div></div>
+<!-- ===== LOOKER STUDIO BAND ===== -->
+<section class="looker-band" id="looker">
+  <div class="looker-head">
+    <div>
+      <h3>📊 รายงานเชิงลึกบน Looker Studio</h3>
+      <p>รายงานต้นแบบและผลงานเผยแพร่ที่จัดทำไว้เดิม สำหรับย้อนกลับไปตรวจสอบข้อมูลเพิ่มเติม</p>
+    </div>
   </div>
-  <p style="font-size:11.5px;color:var(--gray-500);margin-top:14px;text-align:right;">ตัวเลขทั้งหมดคำนวณอัตโนมัติจากฐานข้อมูลจริง และปรับปรุงตามข้อมูลที่บันทึกเพิ่มขึ้นในแต่ละเดือน</p>
+  <div class="looker-grid">
+    <a class="lk-card" href="https://datastudio.google.com/reporting/68984584-16fa-45f3-ab66-9b88b8f92168/page/page_12345" target="_blank" rel="noopener">
+      <div class="lk-ic">🗂️</div>
+      <div class="lk-t">DWMS Looker Studio (ต้นแบบเดิม)</div>
+      <div class="lk-d">แดชบอร์ดต้นแบบระบบภาระงาน สำหรับย้อนดูข้อมูลและรูปแบบรายงานเดิม</div>
+      <span class="lk-go">เปิดรายงาน →</span>
+    </a>
+    <a class="lk-card" href="https://datastudio.google.com/reporting/68984584-16fa-45f3-ab66-9b88b8f92168/page/p_ujmsj51g4d" target="_blank" rel="noopener">
+      <div class="lk-ic">📝</div>
+      <div class="lk-t">ผลงานเผยแพร่และงานวิจัย</div>
+      <div class="lk-d">รวบรวมผลงานเผยแพร่ บทความ และผลงานทางวิชาการที่เกี่ยวข้อง</div>
+      <span class="lk-go">เปิดรายงาน →</span>
+    </a>
+    <a class="lk-card" href="https://datastudio.google.com/reporting/68984584-16fa-45f3-ab66-9b88b8f92168/page/p_fl8r46mw4d" target="_blank" rel="noopener">
+      <div class="lk-ic">🎓</div>
+      <div class="lk-t">Proceedings &amp; ผลงานวิจัย</div>
+      <div class="lk-d">รายงานการประชุมวิชาการ (Proceedings) และผลงานวิจัยฉบับเต็ม</div>
+      <span class="lk-go">เปิดรายงาน →</span>
+    </a>
+  </div>
 </section>
 
 <div class="section-head" id="quickaccess"><h2>ระบบสนับสนุนการทำงาน</h2><p>เข้าถึงเครื่องมือช่วยเหลือการทำงานของนักวิชาการโสตทัศนศึกษา</p></div>
@@ -515,16 +565,8 @@
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-col">
-      <h4>DWMS | คณะวิศวกรรมศาสตร์ มมส.</h4>
-      <p>ระบบภาระงานเชิงหลักฐานสำหรับนักวิชาการโสตทัศนศึกษา</p>
-    </div>
-    <div class="footer-col">
-      <h4>ติดต่อเจ้าหน้าที่</h4>
-      <p>นายปัญญา จีระฉัตร</p>
-      <p>นักวิชาการโสตทัศนศึกษา</p>
-      <p>โทรศัพท์: 087-235-9848</p>
-    </div>
+    <div class="footer-col"><h4>DWMS | คณะวิศวกรรมศาสตร์ มมส.</h4><p>ระบบภาระงานเชิงหลักฐานสำหรับนักวิชาการโสตทัศนศึกษา</p></div>
+    <div class="footer-col"><h4>ติดต่อเจ้าหน้าที่</h4><p>นายปัญญา จีระฉัตร</p><p>นักวิชาการโสตทัศนศึกษา</p><p>โทรศัพท์: 087-235-9848</p></div>
     <div class="footer-col">
       <h4>ขอรับบริการออนไลน์</h4>
       <a class="qr-box" href="https://docs.google.com/forms/d/e/1FAIpQLScyGClAdAnwhysYFL5M6BY8cy-SSrKegPAJtYHp0KDZPRstfg/viewform" target="_blank" rel="noopener">
@@ -537,7 +579,6 @@
       </a>
     </div>
   </div>
-
   <div class="footer-bottom">
     © 2569 คณะวิศวกรรมศาสตร์ มหาวิทยาลัยมหาสารคาม<br>
     พัฒนาโดย <span class="dev">นายปัญญา จีระฉัตร</span> | นักวิชาการโสตทัศนศึกษา |
@@ -550,10 +591,12 @@
 var SHEET_ID="1am2WPhKcEzATV4478hIq-5R3Oh81eBk0UvC_cp-ZLTs";
 var GID="1452503207";
 var CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRielYBsvmmmidy6lcOHtuRcxaUv7cAd5yYCerw2ky4wiKV3TbopZ_KGfxQL6xXXQatfGYBzKSXlrUM/pub?gid=1452503207&single=true&output=csv";
-/* ชีตสรุปรายเดือน (Dashboard) */
 var MSHEET_ID="1-lTr-EOopi9HqlcojVYQDdU0b3Mio9P7JNRmlBgxjR8";
 var MGID="0";
 
+/* ===== ค่าคงที่การคำนวณมูลค่า ===== */
+var COST_PER_HOUR=300;   /* ต้นทุนแรงงานเฉลี่ย บาท/ชั่วโมง */
+var COST_PER_SHEET=3;    /* ต้นทุนกระดาษรวมหมึก/พิมพ์/จัดเก็บ บาท/แผ่น */
 var HOURS_SAVED_PER_JOB=0.75, PAPER_SAVED_PER_JOB=2;
 
 var CATEGORY_COLORS=[
@@ -571,7 +614,6 @@ var CATEGORY_COLORS=[
   {key:"อื่น ๆ",color:"#90A4AE",name:"อื่น ๆ"}
 ];
 
-/* ข้อมูลสำรอง (ใช้เมื่อดึงชีตสรุปไม่ได้) */
 var FALLBACK_MONTHLY=[
  {m:"กันยายน 2025",n:17,w:56,h:9,avgW:3.29,avgT:31.76,ok:17,rate:100,sh:12.75,sp:34,chg:"เริ่มการใช้งาน",i:"เป็นเดือนเริ่มต้นของการใช้งานระบบ DWMS มีการให้บริการ 17 ครั้ง และเริ่มจัดเก็บข้อมูลภาระงานในรูปแบบดิจิทัลอย่างเป็นระบบ",c:"เริ่มนำระบบ DWMS มาใช้แทนการบันทึกข้อมูลแบบเดิม พร้อมให้ผู้ปฏิบัติงานทดลองใช้งานจริง",a:"กำหนดรูปแบบการบันทึกข้อมูล สร้างมาตรฐานการบันทึกภาระงาน และตรวจสอบความถูกต้องของข้อมูลก่อนใช้งานจริง",o:"สามารถเริ่มสะสมฐานข้อมูลภาระงานได้ครบถ้วน และสร้างข้อมูลพื้นฐานสำหรับการติดตามผลในระยะต่อไป"},
  {m:"ตุลาคม 2025",n:31,w:152.9,h:23.75,avgW:4.93,avgT:45.97,ok:31,rate:100,sh:23.25,sp:62,chg:"82.35",i:"จำนวนการให้บริการเพิ่มขึ้นอย่างชัดเจนจากเดือนก่อน แสดงถึงการยอมรับและการใช้งานระบบที่เพิ่มขึ้น",c:"ผู้ปฏิบัติงานเริ่มใช้งานระบบอย่างต่อเนื่องและมีการบันทึกข้อมูลครบถ้วนมากขึ้น",a:"ติดตามการใช้งานจริง ปรับปรุงรูปแบบการบันทึกข้อมูล และตรวจสอบความสมบูรณ์ของข้อมูลทุกวัน",o:"ฐานข้อมูลมีความต่อเนื่องและสามารถใช้ติดตามภาระงานได้อย่างมีประสิทธิภาพ"},
@@ -591,12 +633,13 @@ var FALLBACK_MONTHLY=[
 var allRows=[],filteredRows=[],currentPage=1,perPage=10,isSyncing=false;
 var MONTHLY=[],curMetric='n';
 var METRICS=[
- {k:'n',   label:'จำนวนครั้ง',    unit:'ครั้ง', dec:0, sub:'จำนวนการให้บริการในแต่ละเดือน'},
- {k:'w',   label:'ภาระงาน',      unit:'หน่วย', dec:1, sub:'ภาระงานรวม (หน่วย) ในแต่ละเดือน'},
- {k:'h',   label:'ชั่วโมงทำงาน',  unit:'ชม.',  dec:2, sub:'เวลาปฏิบัติงานรวมในแต่ละเดือน'},
- {k:'avgT',label:'เวลาเฉลี่ย/ครั้ง',unit:'นาที', dec:1, sub:'ระยะเวลาปฏิบัติงานเฉลี่ยต่อรายการ'},
- {k:'sh',  label:'เวลาที่ประหยัด', unit:'ชม.',  dec:2, sub:'เวลาที่ลดลงได้จากการใช้ระบบดิจิทัล'},
- {k:'sp',  label:'กระดาษที่ลด',   unit:'แผ่น', dec:0, sub:'จำนวนกระดาษที่ลดการใช้ในแต่ละเดือน'}
+ {k:'n',label:'จำนวนครั้ง',unit:'ครั้ง',dec:0,sub:'จำนวนการให้บริการในแต่ละเดือน'},
+ {k:'w',label:'ภาระงาน',unit:'หน่วย',dec:1,sub:'ภาระงานรวม (หน่วย) ในแต่ละเดือน'},
+ {k:'h',label:'ชั่วโมงทำงาน',unit:'ชม.',dec:2,sub:'เวลาปฏิบัติงานรวมในแต่ละเดือน'},
+ {k:'avgT',label:'เวลาเฉลี่ย/ครั้ง',unit:'นาที',dec:1,sub:'ระยะเวลาปฏิบัติงานเฉลี่ยต่อรายการ'},
+ {k:'sh',label:'เวลาที่ประหยัด',unit:'ชม.',dec:2,sub:'เวลาที่ลดลงได้จากการใช้ระบบดิจิทัล'},
+ {k:'sp',label:'กระดาษที่ลด',unit:'แผ่น',dec:0,sub:'จำนวนกระดาษที่ลดการใช้ในแต่ละเดือน'},
+ {k:'money',label:'มูลค่าที่ประหยัด',unit:'บาท',dec:0,sub:'มูลค่าที่ประหยัดได้ในแต่ละเดือน (เวลา×300 + กระดาษ×3)'}
 ];
 var TH_MONTH={"มกราคม":"ม.ค.","กุมภาพันธ์":"ก.พ.","มีนาคม":"มี.ค.","เมษายน":"เม.ย.","พฤษภาคม":"พ.ค.","มิถุนายน":"มิ.ย.","กรกฎาคม":"ก.ค.","สิงหาคม":"ส.ค.","กันยายน":"ก.ย.","ตุลาคม":"ต.ค.","พฤศจิกายน":"พ.ย.","ธันวาคม":"ธ.ค."};
 
@@ -604,13 +647,19 @@ var fmt=function(n,d){return Number(n||0).toLocaleString('th-TH',{minimumFractio
 function setText(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
 function num(v){if(v===undefined||v===null)return 0;var s=String(v).replace(/,/g,'').replace(/[^\d.\-]/g,'');var f=parseFloat(s);return isNaN(f)?0:f;}
 function shortMonth(m){var p=String(m||'').trim().split(/\s+/);var nm=TH_MONTH[p[0]]||p[0]||'';var y=p[1]?String(parseInt(p[1],10)+543).slice(-2):'';return{a:nm,b:y};}
-
-function setMsg(html,color){
-  var el=document.getElementById('registryBody');
-  if(el)el.innerHTML='<tr><td colspan="8" style="text-align:center;padding:40px;color:'+(color||'#8A99A8')+';">'+html+'</td></tr>';
-}
+function setMsg(html,color){var el=document.getElementById('registryBody');if(el)el.innerHTML='<tr><td colspan="8" style="text-align:center;padding:40px;color:'+(color||'#8A99A8')+';">'+html+'</td></tr>';}
 function getCategoryStyle(t){for(var i=0;i<CATEGORY_COLORS.length;i++){if(t&&t.indexOf(CATEGORY_COLORS[i].key)!==-1)return CATEGORY_COLORS[i];}return{color:"#90A4AE",name:t||"ไม่ระบุ"};}
-function getStatusClass(t){if(t&&t.indexOf("ไม่สำเร็จ")!==-1)return{cls:"fail",label:"ไม่สำเร็จ"};if(t&&t.indexOf("สำเร็จ")!==-1)return{cls:"done",label:"สำเร็จ"};return{cls:"fail",label:t||"ไม่ระบุ"};}
+
+/* ===== สถานะงาน: รองรับ 4 สถานะจริง ===== */
+function getStatusClass(t){
+  var s=String(t||'').trim();
+  if(!s||s==='-')return{cls:'other',key:'other',label:'ไม่ระบุ'};
+  if(s.indexOf('ไม่สำเร็จ')!==-1)return{cls:'fail',key:'fail',label:'ไม่สำเร็จ'};
+  if(s.indexOf('ระหว่างดำเนินการ')!==-1||s.indexOf('กำลังดำเนินการ')!==-1||s.indexOf('ดำเนินการอยู่')!==-1)return{cls:'prog',key:'prog',label:'อยู่ระหว่างดำเนินการ'};
+  if(s.indexOf('รับเรื่อง')!==-1||s.indexOf('รอดำเนินการ')!==-1)return{cls:'recv',key:'recv',label:'รับเรื่องไว้ก่อน'};
+  if(s.indexOf('สำเร็จ')!==-1||s.indexOf('เสร็จ')!==-1)return{cls:'done',key:'done',label:'สำเร็จ'};
+  return{cls:'other',key:'other',label:s};
+}
 function findIdx(labels,keys){for(var i=0;i<labels.length;i++){for(var k=0;k<keys.length;k++){if(labels[i]&&labels[i].indexOf(keys[k])!==-1)return i;}}return -1;}
 
 function buildRows(labels,matrix){
@@ -620,30 +669,16 @@ function buildRows(labels,matrix){
       iSt=findIdx(labels,["สถานะ"]),iNote=findIdx(labels,["หมายเหตุ"]);
   var out=[];
   for(var r=0;r<matrix.length;r++){
-    var row=matrix[r];
-    if(!row||row.join('').trim()==='')continue;
+    var row=matrix[r];if(!row||row.join('').trim()==='')continue;
     out.push({no:"AV-"+String(out.length+1).padStart(4,"0"),date:row[iDate]||"-",type:row[iType]||"-",detail:row[iDetail]||"-",room:row[iRoom]||"-",duration:(parseFloat(row[iDur])||0)*15,weight:parseFloat(row[iW])||0,status:row[iSt]||"-",note:row[iNote]||"-"});
   }
   return out.reverse();
 }
 function finish(rows){
-  allRows=rows;
-  setText('lastUpdated',new Date().toLocaleString('th-TH'));
-  buildCategoryOptions();updateKPI();applyFilters();renderCategoryMix();endSync(true);
-}
-function updateKPI(){
-  var total=allRows.length;
-  var done=allRows.filter(function(r){return getStatusClass(r.status).cls==='done';}).length;
-  var workload=allRows.reduce(function(s,r){return s+r.weight;},0);
-  var minutes=allRows.reduce(function(s,r){return s+r.duration;},0);
-  setText('kTotal',fmt(total));setText('kWorkload',fmt(workload,0));
-  setText('kAvgW',total?(workload/total).toFixed(2):'0');
-  setText('kHours',(minutes/60).toFixed(2));
-  setText('kRate',(total?(done/total*100):0).toFixed(2)+'%');
-  setText('kSaved',fmt(total*HOURS_SAVED_PER_JOB,1));setText('kPaper',fmt(total*PAPER_SAVED_PER_JOB));
+  allRows=rows;setText('lastUpdated',new Date().toLocaleString('th-TH'));
+  buildCategoryOptions();applyFilters();renderCategoryMix();endSync(true);
 }
 
-/* ===== ปุ่มซิงก์ ===== */
 function manualSync(){
   if(isSyncing)return;isSyncing=true;
   var b=document.getElementById('syncBtn');b.classList.add('loading');b.disabled=true;
@@ -655,8 +690,6 @@ function endSync(ok){
   setText('syncLabel','ซิงก์ข้อมูลล่าสุด');
   if(ok){var n=document.getElementById('syncNote');n.classList.add('show');setTimeout(function(){n.classList.remove('show');},2500);}
 }
-
-/* ===== ตัวโหลดกลาง (JSONP) ===== */
 function gvizLoad(sheetId,gid,onOK,onFail){
   var cb="dwmsCB_"+Math.random().toString(36).slice(2),done=false;
   var s=document.createElement('script');
@@ -698,8 +731,6 @@ function loadTrackingData(){
       });
   });
 }
-
-/* ===== DASHBOARD: โหลดชีตสรุปรายเดือน ===== */
 function buildMonthly(labels,matrix){
   var i={m:findIdx(labels,["เดือน"]),n:findIdx(labels,["จำนวนการให้บริการ"]),w:findIdx(labels,["ภาระงานรวม"]),
     h:findIdx(labels,["เวลาปฏิบัติงานรวม"]),avgW:findIdx(labels,["ค่าเฉลี่ยภาระงาน"]),avgT:findIdx(labels,["ระยะเวลาปฏิบัติงานเฉลี่ย"]),
@@ -709,65 +740,81 @@ function buildMonthly(labels,matrix){
   var out=[];
   for(var r=0;r<matrix.length;r++){
     var row=matrix[r];if(!row||!row[i.m]||String(row[i.m]).trim()==='')continue;
-    out.push({m:row[i.m],n:num(row[i.n]),w:num(row[i.w]),h:num(row[i.h]),avgW:num(row[i.avgW]),avgT:num(row[i.avgT]),
+    var o={m:row[i.m],n:num(row[i.n]),w:num(row[i.w]),h:num(row[i.h]),avgW:num(row[i.avgW]),avgT:num(row[i.avgT]),
       ok:num(row[i.ok]),rate:num(row[i.rate]),sh:num(row[i.sh]),sp:num(row[i.sp]),chg:row[i.chg]||'-',
-      i:row[i.i2]||'-',c:row[i.c]||'-',a:row[i.a]||'-',o:row[i.o]||'-'});
+      i:row[i.i2]||'-',c:row[i.c]||'-',a:row[i.a]||'-',o:row[i.o]||'-'};
+    out.push(o);
   }
   return out;
 }
 function loadMonthly(){
   gvizLoad(MSHEET_ID,MGID,function(l,m){
-    var d=buildMonthly(l,m);
-    MONTHLY=(d&&d.length)?d:FALLBACK_MONTHLY;
-    renderDashboard();
-  },function(){ MONTHLY=FALLBACK_MONTHLY; renderDashboard(); });
+    var d=buildMonthly(l,m);MONTHLY=(d&&d.length)?d:FALLBACK_MONTHLY;renderDashboard();
+  },function(){MONTHLY=FALLBACK_MONTHLY;renderDashboard();});
 }
-
-/* ===== นับเลขขึ้น ===== */
-function countUp(el,target,dec){
-  var start=0,t0=null,dur=1400;
-  function step(ts){
-    if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);
-    var e=1-Math.pow(1-p,3);
-    el.textContent=fmt(start+(target-start)*e,dec||0);
-    if(p<1)requestAnimationFrame(step);
-  }
+function countUp(el,target,dec,suffix){
+  if(!el)return;var t0=null,dur=1400;
+  function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=1-Math.pow(1-p,3);
+    el.textContent=fmt(target*e,dec||0)+(suffix||'');if(p<1)requestAnimationFrame(step);}
   requestAnimationFrame(step);
 }
+function moneyOf(r){return r.sh*COST_PER_HOUR+r.sp*COST_PER_SHEET;}
 
 function renderDashboard(){
   if(!MONTHLY.length)return;
+  MONTHLY.forEach(function(r){r.money=moneyOf(r);});
   var tot=MONTHLY.reduce(function(a,r){return{n:a.n+r.n,w:a.w+r.w,h:a.h+r.h,ok:a.ok+r.ok,sh:a.sh+r.sh,sp:a.sp+r.sp};},{n:0,w:0,h:0,ok:0,sh:0,sp:0});
   var rate=tot.n?tot.ok/tot.n*100:0;
   setText('dashPeriod',MONTHLY[0].m+' – '+MONTHLY[MONTHLY.length-1].m);
+
+  /* KPI (ย้ายมาด้านล่าง) */
   countUp(document.getElementById('dTotal'),tot.n,0);
   countUp(document.getElementById('dWork'),tot.w,1);
   countUp(document.getElementById('dHours'),tot.h,2);
   countUp(document.getElementById('dSaved'),tot.sh,2);
   countUp(document.getElementById('dPaper'),tot.sp,0);
-  setText('dRate',rate.toFixed(2)+'%');
+  countUp(document.getElementById('dAvgW'),tot.n?tot.w/tot.n:0,2);
+  countUp(document.getElementById('dRate'),rate,2,'%');
   setText('dRateSub',fmt(tot.ok)+' จาก '+fmt(tot.n)+' รายการ');
-  /* gauge */
+
+  /* มูลค่าสะสม */
+  var mTime=tot.sh*COST_PER_HOUR,mPaper=tot.sp*COST_PER_SHEET,mAll=mTime+mPaper;
+  countUp(document.getElementById('mvTime'),mTime,0);
+  countUp(document.getElementById('mvPaper'),mPaper,0);
+  countUp(document.getElementById('mvTotal'),mAll,0);
+  setTimeout(function(){
+    document.getElementById('mvTime').innerHTML=fmt(mTime)+'<span class="mc-u">บาท</span>';
+    document.getElementById('mvPaper').innerHTML=fmt(mPaper)+'<span class="mc-u">บาท</span>';
+    document.getElementById('mvTotal').innerHTML=fmt(mAll)+'<span class="mc-u">บาท</span>';
+  },1450);
+  setText('mfTime',fmt(tot.sh,2)+' ชม. × '+COST_PER_HOUR+' บาท/ชม.');
+  setText('mfPaper',fmt(tot.sp)+' แผ่น × '+COST_PER_SHEET+' บาท/แผ่น');
+  var st=document.getElementById('segTime'),sp=document.getElementById('segPaper');
+  st.style.width='0';sp.style.width='0';st.textContent='';sp.textContent='';
+  setTimeout(function(){
+    st.style.width=(mAll?mTime/mAll*100:0)+'%';sp.style.width=(mAll?mPaper/mAll*100:0)+'%';
+    st.textContent=fmt(mTime)+' บาท';sp.textContent=mPaper?fmt(mPaper):'';
+  },250);
+  var step=Math.ceil(mAll/5/10000)*10000||1;var ax='';
+  for(var t=0;t<=step*5;t+=step){ax+='<span>'+fmt(t)+'</span>';}
+  document.getElementById('moneyAxis').innerHTML=ax;
+  setText('moneyPerMonth','· เฉลี่ย '+fmt(mAll/MONTHLY.length,0)+' บาท/เดือน');
+
+  /* Gauge */
   var g=document.getElementById('gaugeProg'),C=2*Math.PI*78;
-  g.setAttribute('stroke-dasharray',C.toFixed(1));
-  g.setAttribute('stroke-dashoffset',C.toFixed(1));
+  g.setAttribute('stroke-dasharray',C.toFixed(1));g.setAttribute('stroke-dashoffset',C.toFixed(1));
   setTimeout(function(){g.setAttribute('stroke-dashoffset',(C*(1-rate/100)).toFixed(1));},250);
-  var gv=document.getElementById('gaugeVal'),v0=0;
-  var iv=setInterval(function(){v0+=rate/45;if(v0>=rate){v0=rate;clearInterval(iv);}gv.textContent=v0.toFixed(2)+'%';},28);
+  countUp(document.getElementById('gaugeVal'),rate,2,'%');
   var lowest=MONTHLY.reduce(function(a,b){return b.rate<a.rate?b:a;});
-  setText('gaugeNote','');
   document.getElementById('gaugeNote').innerHTML='ดำเนินงานสำเร็จ <b>'+fmt(tot.ok)+'</b> จาก '+fmt(tot.n)+' รายการ<br><span style="color:#8A99A8;font-size:11.5px;">เดือนที่ต่ำที่สุด: '+lowest.m+' ('+lowest.rate.toFixed(2)+'%)</span>';
 
-  renderMetricTabs();renderBars();renderArea();renderInsightSelect();renderMonthTable();
+  renderMetricTabs();renderBars();renderInsightSelect();renderMonthTable();
 }
-
 function renderMetricTabs(){
   var box=document.getElementById('metricTabs');box.innerHTML='';
   METRICS.forEach(function(m){
-    var b=document.createElement('button');
-    b.className='mtab'+(m.k===curMetric?' active':'');b.textContent=m.label;
-    b.onclick=function(){curMetric=m.k;renderMetricTabs();renderBars();};
-    box.appendChild(b);
+    var b=document.createElement('button');b.className='mtab'+(m.k===curMetric?' active':'');b.textContent=m.label;
+    b.onclick=function(){curMetric=m.k;renderMetricTabs();renderBars();};box.appendChild(b);
   });
 }
 function renderBars(){
@@ -775,14 +822,12 @@ function renderBars(){
   setText('chartSub',met.sub+' · หน่วย: '+met.unit);
   var box=document.getElementById('barChart');box.innerHTML='';
   var vals=MONTHLY.map(function(r){return r[curMetric]||0;});
-  var max=Math.max.apply(null,vals)||1;
-  var peak=vals.indexOf(max),last=MONTHLY.length-1;
+  var max=Math.max.apply(null,vals)||1,peak=vals.indexOf(max),last=MONTHLY.length-1;
   MONTHLY.forEach(function(r,idx){
-    var v=r[curMetric]||0,pct=Math.max((v/max)*100,2.5);
-    var sm=shortMonth(r.m);
+    var v=r[curMetric]||0,pct=Math.max((v/max)*100,2.5),sm=shortMonth(r.m);
     var col=document.createElement('div');col.className='bar-col';
     col.innerHTML='<div class="bar-tip"><b>'+r.m+'</b><br>'+met.label+': '+fmt(v,met.dec)+' '+met.unit+
-      '<br>ให้บริการ '+fmt(r.n)+' ครั้ง · สำเร็จ '+r.rate.toFixed(2)+'%</div>'+
+      '<br>ให้บริการ '+fmt(r.n)+' ครั้ง · สำเร็จ '+r.rate.toFixed(2)+'%<br>มูลค่าที่ประหยัด '+fmt(r.money)+' บาท</div>'+
       '<div class="bar-val">'+fmt(v,met.dec)+'</div>'+
       '<div class="bar-fill'+(idx===peak?' top':(idx===last?' latest':''))+'"></div>'+
       '<div class="bar-x"><b>'+sm.a+'</b>'+sm.b+'</div>';
@@ -790,40 +835,13 @@ function renderBars(){
     setTimeout(function(){col.querySelector('.bar-fill').style.height=pct+'%';col.classList.add('show');},60+idx*55);
   });
 }
-function renderArea(){
-  var svg=document.getElementById('areaChart');
-  var W=800,H=210,pad=16;
-  var ch=[],cp=[],a=0,b=0;
-  MONTHLY.forEach(function(r){a+=r.sh;b+=r.sp;ch.push(a);cp.push(b);});
-  var maxH=Math.max.apply(null,ch)||1,maxP=Math.max.apply(null,cp)||1;
-  function pts(arr,max){
-    return arr.map(function(v,i){
-      var x=pad+(i*(W-pad*2)/Math.max(arr.length-1,1));
-      var y=H-pad-(v/max)*(H-pad*2);
-      return x.toFixed(1)+','+y.toFixed(1);
-    }).join(' ');
-  }
-  var p1=pts(ch,maxH),p2=pts(cp,maxP);
-  var lastH=ch[ch.length-1],lastP=cp[cp.length-1];
-  var h='<defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2196F3" stop-opacity=".28"/><stop offset="100%" stop-color="#2196F3" stop-opacity="0"/></linearGradient></defs>';
-  h+='<polygon points="'+pad+','+(H-pad)+' '+p1+' '+(W-pad)+','+(H-pad)+'" fill="url(#ag)"/>';
-  h+='<polyline class="ln" points="'+p1+'" stroke="#1E88E5"/>';
-  h+='<polyline class="ln" points="'+p2+'" stroke="#00BFA5" style="animation-delay:.25s"/>';
-  var lp1=p1.split(' ').pop().split(','),lp2=p2.split(' ').pop().split(',');
-  h+='<g class="pt"><circle cx="'+lp1[0]+'" cy="'+lp1[1]+'" r="6" fill="#1E88E5" stroke="#fff" stroke-width="3"/>';
-  h+='<circle cx="'+lp2[0]+'" cy="'+lp2[1]+'" r="6" fill="#00BFA5" stroke="#fff" stroke-width="3"/>';
-  h+='<text x="'+(lp1[0]-8)+'" y="'+(lp1[1]-13)+'" text-anchor="end" font-family="Kanit" font-size="14" font-weight="700" fill="#1565C0">'+fmt(lastH,1)+' ชม.</text>';
-  h+='<text x="'+(lp2[0]-8)+'" y="'+(lp2[1]+26)+'" text-anchor="end" font-family="Kanit" font-size="14" font-weight="700" fill="#00897B">'+fmt(lastP)+' แผ่น</text></g>';
-  svg.innerHTML=h;
-}
 function renderCategoryMix(){
   var box=document.getElementById('catList');if(!box)return;
   if(!allRows.length){box.innerHTML='<div style="color:#8A99A8;font-size:13px;">กำลังรอข้อมูลทะเบียนงาน...</div>';return;}
   var map={};
-  allRows.forEach(function(r){var c=getCategoryStyle(r.type);var k=c.name;if(!map[k])map[k]={n:0,w:0,color:c.color};map[k].n++;map[k].w+=r.weight;});
+  allRows.forEach(function(r){var c=getCategoryStyle(r.type),k=c.name;if(!map[k])map[k]={n:0,w:0,color:c.color};map[k].n++;map[k].w+=r.weight;});
   var arr=Object.keys(map).map(function(k){return{name:k,n:map[k].n,w:map[k].w,color:map[k].color};}).sort(function(a,b){return b.n-a.n;});
-  var max=arr[0]?arr[0].n:1,total=allRows.length;
-  box.innerHTML='';
+  var max=arr[0]?arr[0].n:1,total=allRows.length;box.innerHTML='';
   arr.forEach(function(c,i){
     var d=document.createElement('div');d.className='cat-row';
     d.innerHTML='<div class="cat-top"><span class="nm">'+(i+1)+'. '+c.name+'</span><span class="vl">'+fmt(c.n)+' ครั้ง · '+(c.n/total*100).toFixed(1)+'% · '+fmt(c.w,1)+' หน่วย</span></div>'+
@@ -838,18 +856,15 @@ function renderInsightSelect(){
   s.value=MONTHLY.length-1;renderInsight();
 }
 function renderInsight(){
-  var i=parseInt(document.getElementById('insightSelect').value,10);
-  var r=MONTHLY[i];if(!r)return;
-  var g=document.getElementById('insightGrid');
-  g.innerHTML=
+  var i=parseInt(document.getElementById('insightSelect').value,10),r=MONTHLY[i];if(!r)return;
+  document.getElementById('insightGrid').innerHTML=
    '<div class="ins-card"><h5>📌 สรุปสถานการณ์</h5><p>'+r.i+'</p></div>'+
    '<div class="ins-card c2"><h5>🔎 สาเหตุ / ปัจจัย</h5><p>'+r.c+'</p></div>'+
    '<div class="ins-card c3"><h5>🛠️ มาตรการที่ดำเนินการ</h5><p>'+r.a+'</p></div>'+
    '<div class="ins-card c4"><h5>🏆 ผลลัพธ์การบริหารจัดการ</h5><p>'+r.o+'</p></div>';
 }
 function deltaHTML(chg){
-  var s=String(chg||'').trim();
-  var v=parseFloat(s.replace(/,/g,''));
+  var s=String(chg||'').trim(),v=parseFloat(s.replace(/,/g,''));
   if(isNaN(v))return '<span class="delta flat">'+(s||'-')+'</span>';
   if(v>0)return '<span class="delta up">▲ '+v.toFixed(2)+'%</span>';
   if(v<0)return '<span class="delta down">▼ '+Math.abs(v).toFixed(2)+'%</span>';
@@ -857,23 +872,21 @@ function deltaHTML(chg){
 }
 function renderMonthTable(){
   var maxN=Math.max.apply(null,MONTHLY.map(function(r){return r.n;}));
-  var body=document.getElementById('monthBody');
-  body.innerHTML=MONTHLY.map(function(r){
+  document.getElementById('monthBody').innerHTML=MONTHLY.map(function(r){
     return '<tr class="'+(r.n===maxN?'hot':'')+'"><td>'+r.m+(r.n===maxN?' 🔥':'')+'</td><td>'+fmt(r.n)+'</td><td>'+fmt(r.w,1)+'</td><td>'+fmt(r.h,2)+
       '</td><td>'+fmt(r.avgT,2)+'</td><td style="color:'+(r.rate>=100?'#2E7D32':'#D98B04')+';font-weight:700;">'+r.rate.toFixed(2)+'%</td><td>'+deltaHTML(r.chg)+
-      '</td><td>'+fmt(r.sh,2)+'</td><td>'+fmt(r.sp)+'</td></tr>';
+      '</td><td>'+fmt(r.sh,2)+'</td><td>'+fmt(r.sp)+'</td><td style="color:#1565C0;font-weight:700;">'+fmt(r.money)+'</td></tr>';
   }).join('');
-  var t=MONTHLY.reduce(function(a,r){return{n:a.n+r.n,w:a.w+r.w,h:a.h+r.h,ok:a.ok+r.ok,sh:a.sh+r.sh,sp:a.sp+r.sp};},{n:0,w:0,h:0,ok:0,sh:0,sp:0});
+  var t=MONTHLY.reduce(function(a,r){return{n:a.n+r.n,w:a.w+r.w,h:a.h+r.h,ok:a.ok+r.ok,sh:a.sh+r.sh,sp:a.sp+r.sp,money:a.money+r.money};},{n:0,w:0,h:0,ok:0,sh:0,sp:0,money:0});
   document.getElementById('monthFoot').innerHTML='<tr><td>รวมทั้งสิ้น</td><td>'+fmt(t.n)+'</td><td>'+fmt(t.w,1)+'</td><td>'+fmt(t.h,2)+
-    '</td><td>'+(t.n?fmt(t.h*60/t.n,2):'0')+'</td><td>'+(t.n?(t.ok/t.n*100).toFixed(2):'0')+'%</td><td>–</td><td>'+fmt(t.sh,2)+'</td><td>'+fmt(t.sp)+'</td></tr>';
+    '</td><td>'+(t.n?fmt(t.h*60/t.n,2):'0')+'</td><td>'+(t.n?(t.ok/t.n*100).toFixed(2):'0')+'%</td><td>–</td><td>'+fmt(t.sh,2)+'</td><td>'+fmt(t.sp)+'</td><td>'+fmt(t.money)+'</td></tr>';
 }
 function exportMonthlyCSV(){
   if(!MONTHLY.length){alert("ไม่มีข้อมูล");return;}
-  var head=["เดือน","ให้บริการ(ครั้ง)","ภาระงาน(หน่วย)","เวลารวม(ชม.)","เฉลี่ยภาระงาน","เฉลี่ยเวลา(นาที)","สำเร็จ(รายการ)","สำเร็จ(%)","เปลี่ยนแปลง(%)","ลดเวลา(ชม.)","ลดกระดาษ(แผ่น)","สรุปสถานการณ์","สาเหตุ","มาตรการ","ผลลัพธ์"];
-  var rows=MONTHLY.map(function(r){return [r.m,r.n,r.w,r.h,r.avgW,r.avgT,r.ok,r.rate,r.chg,r.sh,r.sp,r.i,r.c,r.a,r.o];});
+  var head=["เดือน","ให้บริการ(ครั้ง)","ภาระงาน(หน่วย)","เวลารวม(ชม.)","เฉลี่ยภาระงาน","เฉลี่ยเวลา(นาที)","สำเร็จ(รายการ)","สำเร็จ(%)","เปลี่ยนแปลง(%)","ลดเวลา(ชม.)","ลดกระดาษ(แผ่น)","มูลค่าที่ประหยัด(บาท)","สรุปสถานการณ์","สาเหตุ","มาตรการ","ผลลัพธ์"];
+  var rows=MONTHLY.map(function(r){return [r.m,r.n,r.w,r.h,r.avgW,r.avgT,r.ok,r.rate,r.chg,r.sh,r.sp,r.money,r.i,r.c,r.a,r.o];});
   var csv="\uFEFF"+[head].concat(rows).map(function(x){return x.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(",");}).join("\n");
-  var a=document.createElement("a");
-  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));
+  var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));
   a.download="DWMS_สรุปรายเดือน_"+new Date().toISOString().slice(0,10)+".csv";a.click();
 }
 
@@ -904,22 +917,24 @@ function applyFilters(){
   filteredRows=allRows.filter(function(r){
     var okCat=catF==='all'||r.type.indexOf(catF)!==-1;
     var okS=!search||(r.no+r.type+r.detail+r.room).toLowerCase().indexOf(search)!==-1;
-    var okSt=statusF==='all'||getStatusClass(r.status).label===statusF;
+    var okSt=statusF==='all'||getStatusClass(r.status).key===statusF;
     return okCat&&okS&&okSt;
   });
   updateSummary();currentPage=1;renderPage();
 }
 function updateSummary(){
-  var total=filteredRows.length;
-  var done=filteredRows.filter(function(r){return getStatusClass(r.status).cls==='done';}).length;
-  var fail=total-done;
+  var total=filteredRows.length,c={done:0,fail:0,prog:0,recv:0,other:0};
+  filteredRows.forEach(function(r){c[getStatusClass(r.status).key]++;});
+  var closed=c.done+c.fail;
   var workload=filteredRows.reduce(function(s,r){return s+r.weight;},0);
   var avgTime=total?filteredRows.reduce(function(s,r){return s+r.duration;},0)/total:0;
   setText('regCount','('+total+'/'+allRows.length+' รายการ · เรียงจากล่าสุด)');
-  setText('sTotal',total);setText('sDone',done);
-  setText('sDonePct',(total?(done/total*100).toFixed(0):0)+'% ของทั้งหมด');
-  setText('sFail',fail);setText('sFailPct',(total?(fail/total*100).toFixed(0):0)+'% ของทั้งหมด');
-  setText('sRate',(total?(done/total*100):0).toFixed(1)+'%');
+  setText('sTotal',total);
+  setText('sDone',c.done);setText('sDonePct',(total?(c.done/total*100).toFixed(1):0)+'% ของทั้งหมด');
+  setText('sProg',c.prog);setText('sProgPct',(total?(c.prog/total*100).toFixed(1):0)+'% ของทั้งหมด');
+  setText('sRecv',c.recv);setText('sRecvPct',(total?(c.recv/total*100).toFixed(1):0)+'% ของทั้งหมด');
+  setText('sFail',c.fail);setText('sFailPct',(total?(c.fail/total*100).toFixed(1):0)+'% ของทั้งหมด');
+  setText('sRate',(closed?(c.done/closed*100):0).toFixed(1)+'%');
   setText('sWorkload',workload.toLocaleString('th-TH',{maximumFractionDigits:1}));
   setText('sAvgTime',avgTime.toFixed(0));
 }
@@ -945,10 +960,9 @@ function nextPage(){if(currentPage*perPage<filteredRows.length){currentPage++;re
 function exportCSV(){
   if(filteredRows.length===0){alert("ไม่มีข้อมูลให้ Export");return;}
   var headers=["เลขที่","ประเภทงาน","รายละเอียด","วันที่","ห้อง/สถานที่","ระยะเวลา(นาที)","ภาระงาน(หน่วย)","สถานะ","หมายเหตุ"];
-  var rows=filteredRows.map(function(r){return [r.no,r.type,r.detail,r.date,r.room,r.duration,r.weight,r.status,r.note];});
+  var rows=filteredRows.map(function(r){return [r.no,r.type,r.detail,r.date,r.room,r.duration,r.weight,getStatusClass(r.status).label,r.note];});
   var csv="\uFEFF"+[headers].concat(rows).map(function(row){return row.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(",");}).join("\n");
-  var link=document.createElement("a");
-  link.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));
+  var link=document.createElement("a");link.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));
   link.download="DWMS_ทะเบียนงานบริการ_"+new Date().toISOString().slice(0,10)+".csv";link.click();
 }
 
