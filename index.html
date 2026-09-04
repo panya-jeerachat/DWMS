@@ -18,6 +18,7 @@
   html{scroll-behavior:smooth;}
   body{font-family:'Sarabun','Kanit',sans-serif;background:linear-gradient(180deg,#FFF 0%,var(--blue-pale) 30%,#DCEEFB 100%);color:var(--gray-900);line-height:1.6;min-height:100vh;}
   a{text-decoration:none;color:inherit;}
+  .print-only{display:none;}
 
   /* NAVBAR */
   .navbar{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:3px solid var(--blue);box-shadow:0 2px 12px rgba(21,101,192,.08);}
@@ -69,6 +70,8 @@
   @keyframes spin{to{transform:rotate(360deg);}}
   .sync-note{font-size:11.5px;color:var(--green);font-weight:600;opacity:0;transition:opacity .3s;}
   .sync-note.show{opacity:1;}
+  .next-sync{font-size:11.5px;color:var(--blue-dark);background:var(--blue-pale);border:1px solid var(--blue-light);border-radius:12px;padding:2px 9px;margin-left:4px;white-space:nowrap;}
+  .next-sync.paused{color:#B26A00;background:var(--amber-bg);border-color:#F5D08A;}
 
   .hint-bar{display:flex;align-items:center;gap:8px;margin:0 24px;padding:9px 14px;background:linear-gradient(90deg,#E8F4FE,#F4FAFF);border:1px dashed var(--blue-light);border-radius:11px;font-size:12.5px;color:var(--blue-deep);}
   .hint-bar b{font-family:'Kanit';font-weight:600;}
@@ -113,55 +116,57 @@
   @media(max-width:1150px){.registry-summary{grid-template-columns:repeat(4,1fr);}}
   @media(max-width:620px){.registry-summary{grid-template-columns:repeat(2,1fr);}}
 
-  /* ============ MODAL ============ */
+  /* ============ MODAL / ใบงาน ============ */
   .modal-back{position:fixed;inset:0;background:rgba(13,35,61,.55);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;}
   .modal-back.show{display:flex;animation:fadeBg .25s ease;}
   @keyframes fadeBg{from{opacity:0;}to{opacity:1;}}
-  .modal{background:#fff;border-radius:20px;max-width:880px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 26px 60px rgba(0,0,0,.32);animation:popIn .32s cubic-bezier(.22,1,.36,1);}
+  .modal{background:#fff;border-radius:20px;max-width:900px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 26px 60px rgba(0,0,0,.32);animation:popIn .32s cubic-bezier(.22,1,.36,1);}
   @keyframes popIn{from{opacity:0;transform:translateY(26px) scale(.96);}to{opacity:1;transform:none;}}
-  .modal-top{background:linear-gradient(120deg,#0D47A1,#1565C0 55%,#1E88E5);color:#fff;padding:20px 24px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;position:relative;overflow:hidden;}
+  .modal-top{background:linear-gradient(120deg,#0D47A1,#1565C0 55%,#1E88E5);color:#fff;padding:18px 22px;border-radius:20px 20px 0 0;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;position:relative;overflow:hidden;}
   .modal-top::before{content:"";position:absolute;top:-60%;left:-25%;width:55%;height:230%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:rotate(18deg);animation:bandSweep 5.5s linear infinite;}
   @keyframes bandSweep{0%{left:-30%;}100%{left:125%;}}
-  .modal-top .mt-id{font-family:'Kanit';font-size:13px;font-weight:600;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:14px;display:inline-block;margin-bottom:9px;}
-  .modal-top h3{font-family:'Kanit';font-size:19px;font-weight:600;line-height:1.45;position:relative;}
-  .modal-top .mt-sub{font-size:12.5px;color:#C7E1F8;margin-top:5px;}
+  .modal-top .org{font-size:11.5px;color:#C7E1F8;letter-spacing:.3px;position:relative;}
+  .modal-top .mt-id{font-family:'Kanit';font-size:12.5px;font-weight:600;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);padding:3px 11px;border-radius:14px;display:inline-block;margin:7px 0 7px;position:relative;}
+  .modal-top h3{font-family:'Kanit';font-size:18px;font-weight:600;line-height:1.45;position:relative;}
+  .modal-top .mt-sub{font-size:12px;color:#C7E1F8;margin-top:4px;position:relative;}
   .modal-close{background:rgba(255,255,255,.16);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;flex-shrink:0;transition:.2s;position:relative;}
   .modal-close:hover{background:#fff;color:var(--blue-deep);transform:rotate(90deg);}
-  .modal-body{padding:22px 24px 26px;}
-  .modal-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:22px;}
+  .modal-body{padding:18px 22px 22px;}
+  .modal-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:20px;align-items:start;}
   @media(max-width:760px){.modal-grid{grid-template-columns:1fr;}}
 
-  .track{background:var(--gray-100);border-radius:14px;padding:16px 18px;margin-bottom:18px;}
-  .track-t{font-family:'Kanit';font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .track{background:var(--gray-100);border-radius:13px;padding:13px 16px;margin-bottom:14px;}
+  .track-t{font-family:'Kanit';font-size:12.5px;font-weight:600;color:var(--gray-700);margin-bottom:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
   .steps{display:flex;align-items:flex-start;}
   .step{flex:1;text-align:center;position:relative;}
-  .step .cir{width:34px;height:34px;border-radius:50%;background:#fff;border:2.5px solid var(--gray-300);color:var(--gray-500);display:flex;align-items:center;justify-content:center;margin:0 auto 7px;font-size:15px;font-weight:700;position:relative;z-index:2;transition:.35s;}
-  .step .lbl{font-size:11.5px;color:var(--gray-500);font-weight:600;line-height:1.35;}
-  .step::before{content:"";position:absolute;top:17px;left:-50%;width:100%;height:3px;background:var(--gray-300);z-index:1;}
+  .step .cir{width:31px;height:31px;border-radius:50%;background:#fff;border:2.5px solid var(--gray-300);color:var(--gray-500);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:14px;font-weight:700;position:relative;z-index:2;transition:.35s;}
+  .step .lbl{font-size:11px;color:var(--gray-500);font-weight:600;line-height:1.3;}
+  .step::before{content:"";position:absolute;top:15px;left:-50%;width:100%;height:3px;background:var(--gray-300);z-index:1;}
   .step:first-child::before{display:none;}
   .step.on .cir{background:linear-gradient(135deg,#43A047,#1B8E4F);border-color:#1B8E4F;color:#fff;}
   .step.on .lbl{color:var(--green);}
   .step.on::before{background:#66BB6A;}
-  .step.cur .cir{background:linear-gradient(135deg,#7C4DFF,#5E35B1);border-color:#5E35B1;color:#fff;box-shadow:0 0 0 0 rgba(124,77,255,.5);animation:ripple 1.8s infinite;}
+  .step.cur .cir{background:linear-gradient(135deg,#7C4DFF,#5E35B1);border-color:#5E35B1;color:#fff;animation:ripple 1.8s infinite;}
   .step.cur .lbl{color:#5E35B1;}
   .step.bad .cir{background:linear-gradient(135deg,#EF5350,#C62828);border-color:#C62828;color:#fff;}
   .step.bad .lbl{color:var(--red);}
   @keyframes ripple{0%{box-shadow:0 0 0 0 rgba(124,77,255,.5);}70%{box-shadow:0 0 0 12px rgba(124,77,255,0);}100%{box-shadow:0 0 0 0 rgba(124,77,255,0);}}
 
-  .dl{display:grid;grid-template-columns:118px 1fr;gap:10px 14px;font-size:13.5px;}
-  .dl dt{color:var(--gray-500);font-size:12.5px;font-weight:600;}
+  .dl{display:grid;grid-template-columns:112px 1fr;gap:7px 12px;font-size:13px;}
+  .dl dt{color:var(--gray-500);font-size:12px;font-weight:600;}
   .dl dd{color:var(--gray-900);word-break:break-word;}
-  .qr-panel{background:linear-gradient(160deg,#E8F4FE,#F6FBFF);border:1.5px solid var(--blue-light);border-radius:16px;padding:18px;text-align:center;height:fit-content;}
-  .qr-panel h4{font-family:'Kanit';font-size:14px;color:var(--blue-deep);margin-bottom:5px;}
-  .qr-panel .qd{font-size:11.5px;color:var(--gray-700);line-height:1.65;margin-bottom:13px;}
-  .qr-panel img{width:186px;height:186px;background:#fff;padding:9px;border-radius:12px;box-shadow:0 6px 16px rgba(21,101,192,.16);display:block;margin:0 auto 13px;}
-  .qr-acts{display:flex;flex-direction:column;gap:8px;}
-  .qr-acts button{padding:9px 12px;border-radius:20px;font-size:12.5px;font-family:'Sarabun';font-weight:600;cursor:pointer;border:1.5px solid var(--blue);background:#fff;color:var(--blue-deep);transition:.2s;}
+  .qr-panel{background:linear-gradient(160deg,#E8F4FE,#F6FBFF);border:1.5px solid var(--blue-light);border-radius:15px;padding:15px;text-align:center;}
+  .qr-panel h4{font-family:'Kanit';font-size:13.5px;color:var(--blue-deep);margin-bottom:4px;}
+  .qr-panel .qd{font-size:11px;color:var(--gray-700);line-height:1.6;margin-bottom:11px;}
+  .qr-panel img{width:168px;height:168px;background:#fff;padding:8px;border-radius:11px;box-shadow:0 6px 16px rgba(21,101,192,.16);display:block;margin:0 auto 11px;}
+  .qr-acts{display:flex;flex-direction:column;gap:7px;}
+  .qr-acts button{padding:8px 12px;border-radius:20px;font-size:12.5px;font-family:'Sarabun';font-weight:600;cursor:pointer;border:1.5px solid var(--blue);background:#fff;color:var(--blue-deep);transition:.2s;}
   .qr-acts button:hover{background:var(--blue);color:#fff;}
   .qr-acts button.primary{background:var(--blue-dark);color:#fff;border-color:var(--blue-dark);}
   .qr-acts button.primary:hover{background:var(--blue-deep);}
-  .live-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--green);background:var(--green-bg);border-radius:12px;padding:3px 10px;margin-top:11px;}
-  .live-tag .ldot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.2s infinite;}
+  .qr-acts button:disabled{opacity:.6;cursor:progress;}
+  .live-tag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;color:var(--green);background:var(--green-bg);border-radius:12px;padding:3px 10px;margin-top:10px;line-height:1.5;}
+  .live-tag .ldot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.2s infinite;flex-shrink:0;}
 
   /* ============ DASHBOARD ============ */
   .dash{max-width:1300px;margin:0 auto 40px;padding:0 24px;}
@@ -205,7 +210,6 @@
   .dash-split{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;margin-bottom:22px;}
   @media(max-width:980px){.dash-split{grid-template-columns:1fr;}}
 
-  /* MONEY PANEL */
   .money-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
   @media(max-width:700px){.money-grid{grid-template-columns:1fr;}}
   .money-card{border:1px solid var(--gray-100);border-radius:13px;padding:16px 17px;transition:.25s;position:relative;overflow:hidden;}
@@ -229,7 +233,6 @@
   .mbar-seg.s1{background:linear-gradient(90deg,#42A5F5,#1565C0);}
   .mbar-seg.s2{background:linear-gradient(90deg,#4DD0C4,#00897B);}
   .maxis{display:flex;justify-content:space-between;margin-left:96px;font-size:10.5px;color:var(--gray-500);margin-top:2px;}
-  /* ป้ายกำกับค่าใต้แถบ — เห็นตัวเลขครบทุกส่วน */
   .mbar-tags{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0 96px;}
   @media(max-width:620px){.mbar-tags{margin-left:0;}}
   .mtag{display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:7px 13px;font-size:12px;background:var(--gray-100);border:1px solid #E3EBF3;}
@@ -365,9 +368,49 @@
   .footer-bottom .dev{color:#fff;font-weight:600;}
   .footer-bottom a{color:#8ECBFF;}
   @media(max-width:700px){.nav-links{width:100%;justify-content:center;}.qr-box{flex-direction:column;text-align:center;}.bars{height:200px;}}
-  @media print{.navbar,.hero,.dash,.looker-band,.quick-grid,.section-head,footer,.registry-card,.modal-close,.qr-acts{display:none !important;}
-    .modal-back{position:static;background:none;display:block !important;padding:0;}
-    .modal{box-shadow:none;max-height:none;animation:none;}}
+
+  /* ================= PRINT : A4 หน้าเดียวจบ ================= */
+  @page{size:A4 portrait;margin:11mm 12mm;}
+  @media print{
+    html,body{background:#fff !important;width:186mm;}
+    body>*{display:none !important;}
+    #jobModal{display:block !important;position:static !important;inset:auto !important;background:none !important;backdrop-filter:none !important;padding:0 !important;}
+    .modal{max-width:100% !important;width:100% !important;max-height:none !important;overflow:visible !important;
+      box-shadow:none !important;border-radius:0 !important;animation:none !important;page-break-inside:avoid;break-inside:avoid;
+      border:1.4pt solid #0D47A1;}
+    .print-only{display:block !important;}
+    .no-print{display:none !important;}
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+    .modal-top{border-radius:0 !important;padding:9pt 12pt !important;}
+    .modal-top::before{display:none !important;}
+    .modal-top .org{font-size:8pt !important;}
+    .modal-top h3{font-size:13pt !important;line-height:1.35 !important;}
+    .modal-top .mt-id{font-size:8.5pt !important;margin:4pt 0 !important;padding:1.5pt 8pt !important;}
+    .modal-top .mt-sub{font-size:8.5pt !important;margin-top:2pt !important;}
+    .modal-body{padding:10pt 12pt 8pt !important;}
+    .modal-grid{grid-template-columns:1.45fr .8fr !important;gap:11pt !important;}
+    .track{padding:7pt 9pt !important;margin-bottom:8pt !important;border-radius:5pt !important;}
+    .track-t{font-size:8.5pt !important;margin-bottom:7pt !important;}
+    .steps .cir{width:20pt !important;height:20pt !important;font-size:9pt !important;border-width:1.5pt !important;margin-bottom:3pt !important;animation:none !important;box-shadow:none !important;}
+    .steps .lbl{font-size:7pt !important;}
+    .step::before{top:9.5pt !important;height:2pt !important;}
+    .status-pill{font-size:8pt !important;padding:2pt 7pt !important;}
+    .status-pill .dot{animation:none !important;}
+    .dl{grid-template-columns:64pt 1fr !important;gap:3.5pt 7pt !important;font-size:8.8pt !important;line-height:1.45 !important;}
+    .dl dt{font-size:8.2pt !important;}
+    .cat-badge{font-size:7.5pt !important;padding:1.5pt 6pt !important;}
+    .qr-panel{padding:8pt !important;border-radius:6pt !important;}
+    .qr-panel h4{font-size:9pt !important;}
+    .qr-panel .qd{font-size:7pt !important;margin-bottom:5pt !important;line-height:1.4 !important;}
+    .qr-panel img{width:112pt !important;height:112pt !important;padding:4pt !important;box-shadow:none !important;border:.6pt solid #BBDEFB !important;margin-bottom:5pt !important;}
+    .live-tag{font-size:6.8pt !important;margin-top:4pt !important;padding:1.5pt 6pt !important;}
+    .live-tag .ldot{animation:none !important;}
+    .print-url{font-size:6.6pt !important;color:#4A5B6B !important;word-break:break-all;line-height:1.35;margin-top:4pt;}
+    .print-sign{display:flex !important;justify-content:space-between;gap:16pt;margin-top:9pt;padding-top:7pt;border-top:.8pt dashed #B9C7D4;}
+    .print-sign div{flex:1;text-align:center;font-size:8pt;color:#4A5B6B;line-height:2.4;}
+    .print-sign .ln{border-bottom:.7pt dotted #8A99A8;height:22pt;margin-bottom:3pt;}
+    .print-foot{margin-top:7pt;padding-top:5pt;border-top:.8pt solid #0D47A1;display:flex;justify-content:space-between;font-size:7pt;color:#8A99A8;}
+  }
 </style>
 </head>
 <body>
@@ -407,7 +450,7 @@
         <div class="registry-icon">📘</div>
         <div>
           <div class="registry-title">ทะเบียนงานบริการโสตทัศนศึกษา <span class="count" id="regCount">(กำลังโหลด...)</span></div>
-          <div class="registry-sub">อัปเดตล่าสุด: <span id="lastUpdated">กำลังโหลด...</span> <span class="sync-note" id="syncNote">✓ ซิงก์ข้อมูลแล้ว</span></div>
+          <div class="registry-sub">อัปเดตล่าสุด: <span id="lastUpdated">กำลังโหลด...</span> <span class="next-sync" id="nextSync">ซิงก์อัตโนมัติทุก 5 นาที</span> <span class="sync-note" id="syncNote">✓ ซิงก์ข้อมูลแล้ว</span></div>
         </div>
       </div>
       <div class="registry-controls">
@@ -425,7 +468,7 @@
       </div>
     </div>
 
-    <div class="hint-bar">📱 <b>คลิกที่รายการใดก็ได้</b> เพื่อดูรายละเอียดฉบับเต็ม และรับ <b>QR Code ติดตามสถานะงานแบบเรียลไทม์</b> — ผู้รับบริการสแกนเก็บไว้ ตรวจสอบได้ทันทีโดยไม่ต้องเข้าระบบ</div>
+    <div class="hint-bar">📱 <b>คลิกที่รายการใดก็ได้</b> เพื่อดูรายละเอียดฉบับเต็ม · พิมพ์ใบงาน A4 หน้าเดียว · และรับ <b>QR Code ติดตามสถานะแบบเรียลไทม์</b> สำหรับผู้รับบริการ</div>
 
     <div class="chip-row" id="chipRow"></div>
 
@@ -457,7 +500,7 @@
   </div>
 </div>
 
-<!-- ============ MODAL ============ -->
+<!-- ============ MODAL / ใบงาน A4 ============ -->
 <div class="modal-back" id="jobModal" onclick="if(event.target===this)closeJob()">
   <div class="modal" id="jobModalBox"></div>
 </div>
@@ -467,7 +510,7 @@
   <div class="dash-head">
     <div>
       <h2>แดชบอร์ดสรุปผู้บริหาร</h2>
-      <p>สรุปผลการดำเนินงานและประสิทธิภาพของระบบ DWMS รายเดือน · เชื่อมต่อฐานข้อมูลจริงแบบเรียลไทม์</p>
+      <p>สรุปผลการดำเนินงานและประสิทธิภาพของระบบ DWMS รายเดือน · เชื่อมต่อฐานข้อมูลจริง อัปเดตทุก 5 นาที</p>
     </div>
     <span class="live-badge"><span class="ldot"></span> LIVE DATA · <span id="dashPeriod">กำลังโหลด</span></span>
   </div>
@@ -577,7 +620,7 @@
     <div class="kpi k6"><span class="bar"></span><span class="ic">🌱</span><div class="v" id="dPaper">0</div><div class="l">กระดาษที่ลดการใช้</div><div class="s">แผ่น · ลดคาร์บอนฟุตพรินต์</div></div>
     <div class="kpi k7"><span class="bar"></span><span class="ic">📊</span><div class="v" id="dAvgW">0</div><div class="l">ค่าเฉลี่ยภาระงาน</div><div class="s">หน่วย/ครั้ง · ความหนักเบาเฉลี่ยของงาน</div></div>
   </div>
-  <p class="dash-note">ข้อมูลทั้งหมดคำนวณจากฐานข้อมูลจริงของระบบ DWMS · ปรับปรุงอัตโนมัติทุกครั้งที่มีการบันทึกงานใหม่</p>
+  <p class="dash-note">ข้อมูลทั้งหมดคำนวณจากฐานข้อมูลจริงของระบบ DWMS · ปรับปรุงอัตโนมัติทุก 5 นาที</p>
 </section>
 
 <section class="looker-band" id="looker">
@@ -659,9 +702,10 @@ var GID="1452503207";
 var CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRielYBsvmmmidy6lcOHtuRcxaUv7cAd5yYCerw2ky4wiKV3TbopZ_KGfxQL6xXXQatfGYBzKSXlrUM/pub?gid=1452503207&single=true&output=csv";
 var MSHEET_ID="1-lTr-EOopi9HqlcojVYQDdU0b3Mio9P7JNRmlBgxjR8";
 var MGID="0";
-var ADMIN_URL="https://script.google.com/a/macros/msu.ac.th/s/AKfycbyx9b4L_ZOjtLE--fUKEVnsi9sIFlrilHRONX3G3fFsDjM9r8OpubmLJTTP7juqBuCLxw/exec";
 
 var COST_PER_HOUR=300, COST_PER_SHEET=3;
+var AUTO_MS=300000;              /* ⏱ อัปเดตอัตโนมัติทุก 5 นาที */
+var nextSyncAt=Date.now()+AUTO_MS;
 
 var CATEGORY_COLORS=[
   {key:"เฉพาะหน้า",color:"#1E88E5",name:"แก้ไขปัญหาเฉพาะหน้า"},
@@ -753,7 +797,16 @@ function manualSync(){
 function endSync(ok){
   isSyncing=false;var b=document.getElementById('syncBtn');b.classList.remove('loading');b.disabled=false;
   setText('syncLabel','ซิงก์ข้อมูลล่าสุด');
+  nextSyncAt=Date.now()+AUTO_MS;
   if(ok){var n=document.getElementById('syncNote');n.classList.add('show');setTimeout(function(){n.classList.remove('show');},2500);}
+}
+function tickNextSync(){
+  var el=document.getElementById('nextSync');if(!el)return;
+  if(openJobId){el.className='next-sync paused';el.textContent='⏸ หยุดอัปเดตชั่วคราว (กำลังเปิดดูรายละเอียด)';return;}
+  var left=Math.max(0,Math.round((nextSyncAt-Date.now())/1000));
+  var mm=Math.floor(left/60),ss=left%60;
+  el.className='next-sync';
+  el.textContent='ซิงก์อัตโนมัติทุก 5 นาที · อีก '+mm+':'+(ss<10?'0':'')+ss;
 }
 function gvizLoad(sheetId,gid,onOK,onFail){
   var cb="dwmsCB_"+Math.random().toString(36).slice(2),done=false;
@@ -840,7 +893,6 @@ function renderDashboard(){
   countUp(document.getElementById('dRate'),rate,2,'%');
   setText('dRateSub',fmt(tot.ok)+' จาก '+fmt(tot.n)+' รายการ');
 
-  /* ===== มูลค่าสะสม ===== */
   var mTime=tot.sh*COST_PER_HOUR,mPaper=tot.sp*COST_PER_SHEET,mAll=mTime+mPaper;
   countUp(document.getElementById('mvTime'),mTime,0);
   countUp(document.getElementById('mvPaper'),mPaper,0);
@@ -858,7 +910,6 @@ function renderDashboard(){
   st.style.width='0';sp.style.width='0';st.textContent='';sp.textContent='';
   setTimeout(function(){
     st.style.width=pTime+'%';sp.style.width=pPaper+'%';
-    /* แสดงตัวเลขในแถบเฉพาะเมื่อกว้างพอ ไม่งั้นอ่านไม่ออก */
     st.textContent=(pTime>=14?fmt(mTime)+' บาท':'');
     sp.textContent=(pPaper>=14?fmt(mPaper)+' บาท':'');
   },250);
@@ -866,8 +917,6 @@ function renderDashboard(){
   var step=Math.ceil(mAll/5/10000)*10000||1,ax='';
   for(var t=0;t<=step*5;t+=step){ax+='<span>'+fmt(t)+'</span>';}
   document.getElementById('moneyAxis').innerHTML=ax;
-
-  /* ป้ายกำกับใต้แถบ — เห็นตัวเลขครบทั้งสองส่วนเสมอ */
   document.getElementById('moneyTags').innerHTML=
     '<span class="mtag t1"><i style="background:linear-gradient(90deg,#42A5F5,#1565C0);"></i><span class="tn">เวลาที่ประหยัด</span><span class="tv">'+fmt(mTime)+' บาท</span><span class="tp">('+pTime.toFixed(1)+'%)</span></span>'+
     '<span class="mtag t2"><i style="background:linear-gradient(90deg,#4DD0C4,#00897B);"></i><span class="tn">กระดาษที่ลดใช้</span><span class="tv">'+fmt(mPaper)+' บาท</span><span class="tp">('+pPaper.toFixed(1)+'%)</span></span>';
@@ -945,7 +994,7 @@ function deltaHTML(chg){
 function renderMonthTable(){
   var maxN=Math.max.apply(null,MONTHLY.map(function(r){return r.n;}));
   var latest=MONTHLY[MONTHLY.length-1];
-  var desc=MONTHLY.slice().reverse();   /* เรียงล่าสุดไว้บนสุด */
+  var desc=MONTHLY.slice().reverse();
   document.getElementById('monthBody').innerHTML=desc.map(function(r){
     var cls=(r===latest?'newest':(r.n===maxN?'hot':''));
     return '<tr class="'+cls+'"><td>'+esc(r.m)+(r===latest?'<span class="badge-new">ล่าสุด</span>':'')+(r.n===maxN?' 🔥':'')+'</td><td>'+fmt(r.n)+'</td><td>'+fmt(r.w,1)+'</td><td>'+fmt(r.h,2)+
@@ -961,8 +1010,7 @@ function exportMonthlyCSV(){
   var head=["เดือน","ให้บริการ(ครั้ง)","ภาระงาน(หน่วย)","เวลารวม(ชม.)","เฉลี่ยภาระงาน","เฉลี่ยเวลา(นาที)","สำเร็จ(รายการ)","สำเร็จ(%)","เปลี่ยนแปลง(%)","ลดเวลา(ชม.)","ลดกระดาษ(แผ่น)","มูลค่าที่ประหยัด(บาท)","สรุปสถานการณ์","สาเหตุ","มาตรการ","ผลลัพธ์"];
   var rows=MONTHLY.slice().reverse().map(function(r){return [r.m,r.n,r.w,r.h,r.avgW,r.avgT,r.ok,r.rate,r.chg,r.sh,r.sp,r.money,r.i,r.c,r.a,r.o];});
   var csv="\uFEFF"+[head].concat(rows).map(function(x){return x.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(",");}).join("\n");
-  var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));
-  a.download="DWMS_สรุปรายเดือน_"+new Date().toISOString().slice(0,10)+".csv";a.click();
+  saveBlob(new Blob([csv],{type:"text/csv;charset=utf-8;"}),"DWMS_สรุปรายเดือน_"+new Date().toISOString().slice(0,10)+".csv");
 }
 
 /* ===== ทะเบียนงาน ===== */
@@ -1039,37 +1087,29 @@ function exportCSV(){
   var headers=["เลขที่","ประเภทงาน","รายละเอียด","วันที่","ห้อง/สถานที่","ระยะเวลา(นาที)","ภาระงาน(หน่วย)","สถานะ","หมายเหตุ","ลิงก์ติดตาม"];
   var rows=filteredRows.map(function(r){return [r.no,r.type,r.detail,r.date,r.room,r.duration,r.weight,getStatusClass(r.status).label,r.note,trackURL(r.no)];});
   var csv="\uFEFF"+[headers].concat(rows).map(function(row){return row.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(",");}).join("\n");
-  var link=document.createElement("a");link.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));
-  link.download="DWMS_ทะเบียนงานบริการ_"+new Date().toISOString().slice(0,10)+".csv";link.click();
+  saveBlob(new Blob([csv],{type:"text/csv;charset=utf-8;"}),"DWMS_ทะเบียนงานบริการ_"+new Date().toISOString().slice(0,10)+".csv");
 }
 
-/* ===== POP-UP ติดตามสถานะ + QR ===== */
-function trackURL(no){
-  return location.origin+location.pathname+'?job='+encodeURIComponent(no);
-}
-function qrURL(no,size){
-  return 'https://api.qrserver.com/v1/create-qr-code/?size='+size+'x'+size+'&margin=0&data='+encodeURIComponent(trackURL(no));
-}
+/* ===== POP-UP / ใบงาน + QR ===== */
+function trackURL(no){return location.origin+location.pathname+'?job='+encodeURIComponent(no);}
+function qrURL(no,size){return 'https://api.qrserver.com/v1/create-qr-code/?size='+size+'x'+size+'&margin=0&data='+encodeURIComponent(trackURL(no));}
 function openJob(no){
   var r=JOB_MAP[no];if(!r)return;
   openJobId=no;renderJobModal(r);
   document.getElementById('jobModal').classList.add('show');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow='hidden';tickNextSync();
   try{history.replaceState(null,'',trackURL(no));}catch(e){}
 }
 function closeJob(){
   openJobId=null;
   document.getElementById('jobModal').classList.remove('show');
   document.body.style.overflow='';
+  nextSyncAt=Date.now()+AUTO_MS;tickNextSync();
   try{history.replaceState(null,'',location.origin+location.pathname);}catch(e){}
 }
 function renderJobModal(r){
   var st=getStatusClass(r.status),cat=getCategoryStyle(r.type),url=trackURL(r.no);
-  function stepCls(n){
-    if(st.step===-1)return n===1?'on':(n===2?'bad':'');
-    if(st.step>=n)return st.step===n&&n<3?'cur':'on';
-    return '';
-  }
+  var today=new Date().toLocaleString('th-TH');
   var steps='<div class="steps">'+
     '<div class="step '+(st.step>=1||st.step===-1?'on':'')+'"><div class="cir">1</div><div class="lbl">รับเรื่อง<br>ไว้ก่อน</div></div>'+
     '<div class="step '+(st.step===-1?'bad':(st.step===2?'cur':(st.step>=3?'on':'')))+'"><div class="cir">'+(st.step===-1?'✕':'2')+'</div><div class="lbl">'+(st.step===-1?'ไม่สำเร็จ':'อยู่ระหว่าง<br>ดำเนินการ')+'</div></div>'+
@@ -1077,12 +1117,13 @@ function renderJobModal(r){
 
   document.getElementById('jobModalBox').innerHTML=
   '<div class="modal-top"><div>'+
+    '<div class="org">คณะวิศวกรรมศาสตร์ มหาวิทยาลัยมหาสารคาม · ใบงานบริการโสตทัศนูปกรณ์ (DWMS)</div>'+
     '<span class="mt-id">'+r.no+'</span>'+
     '<h3>'+esc(r.detail)+'</h3>'+
     '<div class="mt-sub">'+esc(r.type)+' · '+esc(r.room)+' · '+esc(r.date)+'</div>'+
-  '</div><button class="modal-close" onclick="closeJob()">×</button></div>'+
+  '</div><button class="modal-close no-print" onclick="closeJob()">×</button></div>'+
   '<div class="modal-body"><div class="modal-grid"><div>'+
-    '<div class="track"><div class="track-t">📍 สถานะการดำเนินงานปัจจุบัน &nbsp;<span class="status-pill '+st.cls+'"><span class="dot"></span>'+st.label+'</span></div>'+steps+'</div>'+
+    '<div class="track"><div class="track-t">📍 สถานะการดำเนินงานปัจจุบัน <span class="status-pill '+st.cls+'"><span class="dot"></span>'+st.label+'</span></div>'+steps+'</div>'+
     '<dl class="dl">'+
       '<dt>เลขที่งาน</dt><dd style="color:#1565C0;font-weight:700;">'+r.no+'</dd>'+
       '<dt>ประเภทงาน</dt><dd><span class="cat-badge" style="background:'+cat.color+';">'+esc(r.type)+'</span></dd>'+
@@ -1093,22 +1134,101 @@ function renderJobModal(r){
       '<dt>ระยะเวลา</dt><dd>'+r.duration+' นาที ('+(r.duration/60).toFixed(2)+' ชม.)</dd>'+
       '<dt>ภาระงาน</dt><dd>'+r.weight.toFixed(2)+' หน่วย</dd>'+
       '<dt>หมายเหตุ</dt><dd>'+esc(r.note)+'</dd>'+
-      '<dt>ผู้ให้บริการ</dt><dd>นายปัญญา จีระฉัตร · นักวิชาการโสตทัศนศึกษา<br><span style="color:#8A99A8;font-size:12px;">โทร. 087-235-9848</span></dd>'+
-    '</dl></div>'+
+      '<dt>ผู้ให้บริการ</dt><dd>นายปัญญา จีระฉัตร · นักวิชาการโสตทัศนศึกษา · โทร. 087-235-9848</dd>'+
+    '</dl>'+
+    '<div class="print-sign print-only" style="display:none;">'+
+      '<div><div class="ln"></div>ผู้รับบริการ / ผู้ขอใช้บริการ</div>'+
+      '<div><div class="ln"></div>ผู้ปฏิบัติงาน (นักวิชาการโสตทัศนศึกษา)</div>'+
+      '<div><div class="ln"></div>หัวหน้างาน / ผู้ตรวจสอบ</div>'+
+    '</div>'+
+    '</div>'+
     '<div class="qr-panel">'+
       '<h4>📲 QR ติดตามสถานะงานนี้</h4>'+
-      '<div class="qd">สแกนหรือบันทึกรูปไว้ในเครื่อง เปิดดูได้ทุกเวลา<br>ระบบจะแสดง<b>สถานะล่าสุดแบบเรียลไทม์</b>เฉพาะงานนี้<br>โดยไม่ต้องเข้าระบบ DWMS</div>'+
-      '<img src="'+qrURL(r.no,360)+'" alt="QR ติดตามสถานะ '+r.no+'">'+
-      '<div class="qr-acts">'+
-        '<button class="primary" onclick="downloadQR(\''+r.no+'\')">⬇ บันทึกรูป QR</button>'+
+      '<div class="qd">สแกนเพื่อดู<b>สถานะล่าสุดแบบเรียลไทม์</b>เฉพาะงานนี้ โดยไม่ต้องเข้าระบบ DWMS</div>'+
+      '<img id="qrImg" src="'+qrURL(r.no,360)+'" alt="QR ติดตามสถานะ '+r.no+'">'+
+      '<div class="qr-acts no-print">'+
+        '<button class="primary" id="btnQR" onclick="downloadQR(\''+r.no+'\')">⬇ บันทึกรูป QR</button>'+
         '<button onclick="copyTrack(\''+r.no+'\')">🔗 คัดลอกลิงก์ติดตาม</button>'+
-        '<button onclick="window.print()">🖨️ พิมพ์ใบงาน</button>'+
+        '<button onclick="printJob()">🖨️ พิมพ์ใบงาน (A4 หน้าเดียว)</button>'+
       '</div>'+
-      '<span class="live-tag"><span class="ldot"></span> อัปเดตอัตโนมัติทุก 60 วินาที</span>'+
-    '</div></div></div>';
+      '<span class="live-tag no-print"><span class="ldot"></span> อัปเดตอัตโนมัติทุก 5 นาที · หยุดชั่วคราวขณะเปิดหน้านี้</span>'+
+      '<div class="print-url print-only" style="display:none;">ลิงก์ติดตาม: '+esc(url)+'</div>'+
+    '</div></div>'+
+    '<div class="print-foot print-only" style="display:none;">'+
+      '<span>DWMS · ระบบภาระงานเชิงหลักฐาน คณะวิศวกรรมศาสตร์ มมส.</span>'+
+      '<span>พิมพ์เมื่อ '+today+' · เอกสารนี้สร้างอัตโนมัติจากระบบ</span>'+
+    '</div>'+
+  '</div>';
+}
+function printJob(){window.print();}
+
+/* ===== บันทึกรูป QR ทันที (ไม่เปิดแท็บใหม่) ===== */
+function saveBlob(blob,name){
+  if(window.navigator&&window.navigator.msSaveOrOpenBlob){window.navigator.msSaveOrOpenBlob(blob,name);return;}
+  var u=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=u;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(u);if(a.parentNode)a.parentNode.removeChild(a);},1800);
 }
 function downloadQR(no){
-  var a=document.createElement('a');a.href=qrURL(no,600);a.download='DWMS_QR_'+no+'.png';a.target='_blank';a.click();
+  var r=JOB_MAP[no];if(!r)return;
+  var btn=document.getElementById('btnQR'),old=btn?btn.textContent:'';
+  if(btn){btn.disabled=true;btn.textContent='⏳ กำลังสร้างไฟล์...';}
+  function done(msg){if(btn){btn.disabled=false;btn.textContent=msg||old;if(msg)setTimeout(function(){btn.textContent=old;},2200);}}
+  fetch(qrURL(no,560),{mode:'cors',cache:'no-store'})
+    .then(function(res){if(!res.ok)throw 0;return res.blob();})
+    .then(function(blob){
+      return composeQRCard(blob,r).then(function(card){
+        saveBlob(card,'DWMS_QR_'+no+'.png');done('✓ บันทึกไฟล์แล้ว');
+      }).catch(function(){
+        saveBlob(blob,'DWMS_QR_'+no+'.png');done('✓ บันทึกไฟล์แล้ว');
+      });
+    })
+    .catch(function(){
+      /* สำรอง: ดาวน์โหลดตรงผ่าน a[download] */
+      try{
+        var a=document.createElement('a');a.href=qrURL(no,560);a.download='DWMS_QR_'+no+'.png';
+        a.style.display='none';document.body.appendChild(a);a.click();
+        setTimeout(function(){a.remove();},1500);done('✓ เริ่มดาวน์โหลด');
+      }catch(e){done();alert('ไม่สามารถบันทึกไฟล์ได้ กรุณากดค้าง/คลิกขวาที่รูป QR แล้วเลือก "บันทึกรูปภาพ"');}
+    });
+}
+/* ประกอบการ์ด QR พร้อมข้อความ แล้วคืนค่าเป็น Blob */
+function composeQRCard(qrBlob,r){
+  return new Promise(function(resolve,reject){
+    var img=new Image(),url=URL.createObjectURL(qrBlob);
+    img.onload=function(){
+      try{
+        var W=720,H=980,c=document.createElement('canvas');c.width=W;c.height=H;
+        var x=c.getContext('2d');
+        x.fillStyle='#FFFFFF';x.fillRect(0,0,W,H);
+        var g=x.createLinearGradient(0,0,W,150);g.addColorStop(0,'#0D47A1');g.addColorStop(1,'#1E88E5');
+        x.fillStyle=g;x.fillRect(0,0,W,132);
+        x.fillStyle='#FFFFFF';
+        x.font='600 30px Kanit, Sarabun, sans-serif';x.textAlign='center';
+        x.fillText('ติดตามสถานะงานบริการ DWMS',W/2,58);
+        x.font='400 19px Sarabun, sans-serif';x.fillStyle='#C7E1F8';
+        x.fillText('คณะวิศวกรรมศาสตร์ มหาวิทยาลัยมหาสารคาม',W/2,95);
+        var qs=460,qx=(W-qs)/2,qy=178;
+        x.fillStyle='#FFFFFF';x.strokeStyle='#BBDEFB';x.lineWidth=3;
+        x.fillRect(qx-16,qy-16,qs+32,qs+32);x.strokeRect(qx-16,qy-16,qs+32,qs+32);
+        x.drawImage(img,qx,qy,qs,qs);
+        var y=qy+qs+62;
+        x.fillStyle='#0D47A1';x.font='600 34px Kanit, Sarabun, sans-serif';
+        x.fillText(r.no,W/2,y);y+=42;
+        x.fillStyle='#1B2A3A';x.font='400 22px Sarabun, sans-serif';
+        var d=String(r.detail||'');if(d.length>52)d=d.slice(0,52)+'…';
+        x.fillText(d,W/2,y);y+=34;
+        x.fillStyle='#4A5B6B';x.font='400 19px Sarabun, sans-serif';
+        x.fillText('สถานที่: '+String(r.room||'-')+' · วันที่: '+String(r.date||'-'),W/2,y);y+=32;
+        x.fillStyle='#8A99A8';x.font='400 17px Sarabun, sans-serif';
+        x.fillText('สแกนเพื่อดูสถานะล่าสุดแบบเรียลไทม์ · ติดต่อ 087-235-9848',W/2,y);
+        URL.revokeObjectURL(url);
+        c.toBlob(function(b){b?resolve(b):reject();},'image/png');
+      }catch(e){URL.revokeObjectURL(url);reject();}
+    };
+    img.onerror=function(){URL.revokeObjectURL(url);reject();};
+    img.src=url;
+  });
 }
 function copyTrack(no){
   var u=trackURL(no);
@@ -1125,7 +1245,14 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeJob();}
 
 document.addEventListener('DOMContentLoaded',function(){
   loadTrackingData();loadMonthly();
-  setInterval(function(){if(!isSyncing){loadTrackingData();loadMonthly();}},60000);
+  setInterval(tickNextSync,1000);
+  /* อัปเดตอัตโนมัติทุก 5 นาที — ข้ามรอบถ้ากำลังเปิดดูรายละเอียดงาน */
+  setInterval(function(){
+    if(isSyncing)return;
+    if(openJobId){nextSyncAt=Date.now()+AUTO_MS;return;}
+    if(document.hidden){nextSyncAt=Date.now()+AUTO_MS;return;}
+    loadTrackingData();loadMonthly();
+  },AUTO_MS);
 });
 </script>
 
