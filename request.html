@@ -92,9 +92,13 @@
 </div>
 
 <script>
-// TODO: แก้เป็น URL ของ Web App หลังสั่ง Deploy (Deploy > Manage deployments)
-// ต้องตั้ง "Who has access" เป็น "Anyone" (ไม่ใช่ "Anyone with Google account")
-// ไม่เช่นนั้นผู้ใช้จะยังถูกบังคับให้ล็อกอิน Gmail เหมือน Google Form เดิม
+// แก้เป็น URL ของ Web App หลังสั่ง Deploy (ใน Apps Script: Deploy > Manage
+// deployments > ไอคอนดินสอ > Version: New > Deploy) — คัดลอก URL ที่ลงท้ายด้วย
+// "/exec" มาวางแทนที่นี่ (ไม่ใช่ URL ของ Google Sheets และไม่ใช่ URL ของตัว
+// Apps Script editor เอง) ต้องตั้ง "Who has access" เป็น "Anyone" (ไม่ใช่
+// "Anyone with Google account") ไม่เช่นนั้นผู้ใช้จะยังถูกบังคับให้ล็อกอิน Gmail
+// เหมือน Google Form เดิม — และทุกครั้งที่แก้ Code.gs ต้องกด Deploy เวอร์ชันใหม่
+// ด้วย ไม่งั้น Web App ที่ใช้งานจริงจะยังรันโค้ดเวอร์ชันเก่าอยู่
 const SCRIPT_URL = 'https://script.google.com/macros/s/XXXXXXXXXXXXXXXXXXXXXXXX/exec';
 
 function submitRequest(ev){
@@ -102,6 +106,11 @@ function submitRequest(ev){
   const btn = document.getElementById('submitBtn');
   const errBox = document.getElementById('formError');
   errBox.classList.add('hidden');
+
+  if (!SCRIPT_URL || SCRIPT_URL.indexOf('XXXX') !== -1) {
+    showError('ยังไม่ได้ตั้งค่า SCRIPT_URL ในไฟล์นี้ — แก้ตัวแปร SCRIPT_URL ในโค้ดให้เป็น URL ของ Apps Script Web App (ลงท้ายด้วย /exec) ก่อนใช้งานจริง');
+    return false;
+  }
 
   const date = document.getElementById('fDate').value;
   const room = document.getElementById('fRoom').value.trim();
@@ -118,19 +127,32 @@ function submitRequest(ev){
 
   btn.disabled = true; btn.textContent = 'กำลังส่งคำขอ…';
 
+  // Apps Script Web App มักมีปัญหาการอ่านผลลัพธ์กลับข้าม origin (แม้ตั้งค่า
+  // "Anyone" ถูกต้องแล้วก็ตาม เพราะการ redirect ภายในของ Google เอง) ทำให้
+  // fetch โหมดปกติ (cors) โยน error แม้คำขอจะไปถึงปลายทางและบันทึกข้อมูล
+  // สำเร็จจริงก็ตาม — ถ้าเจอกรณีนี้ ระบบจะลองส่งซ้ำแบบ no-cors (ยิงข้อมูลถึง
+  // ปลายทางแน่นอน แต่อ่านผลลัพธ์ยืนยันกลับมาไม่ได้) แทนการฟันธงว่าล้มเหลว
   fetch(SCRIPT_URL, { method: 'POST', body: payload })
     .then(r => r.json())
     .then(res => {
       btn.disabled = false; btn.textContent = 'ส่งคำขอรับบริการ';
       if (!res.ok) { showError(res.message || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'); return; }
-      document.getElementById('formCard').classList.add('hidden');
-      document.getElementById('doneCard').classList.remove('hidden');
+      showDone();
     })
     .catch(() => {
-      btn.disabled = false; btn.textContent = 'ส่งคำขอรับบริการ';
-      showError('เชื่อมต่อระบบไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่อีกครั้ง');
+      fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: payload })
+        .then(() => { btn.disabled = false; btn.textContent = 'ส่งคำขอรับบริการ'; showDone(); })
+        .catch(() => {
+          btn.disabled = false; btn.textContent = 'ส่งคำขอรับบริการ';
+          showError('เชื่อมต่อระบบไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่อีกครั้ง หรือแจ้งผู้ดูแลระบบว่า SCRIPT_URL อาจยังไม่ถูกตั้งค่า/ยังไม่ได้ Deploy เวอร์ชันล่าสุด');
+        });
     });
   return false;
+}
+
+function showDone(){
+  document.getElementById('formCard').classList.add('hidden');
+  document.getElementById('doneCard').classList.remove('hidden');
 }
 
 function showError(msg){
