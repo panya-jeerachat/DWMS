@@ -116,7 +116,7 @@
   @media(max-width:1150px){.registry-summary{grid-template-columns:repeat(4,1fr);}}
   @media(max-width:620px){.registry-summary{grid-template-columns:repeat(2,1fr);}}
 
-  /* ============ MODAL / ใบงาน ============ */
+  /* ============ MODAL / ใบปะหน้า ============ */
   .modal-back{position:fixed;inset:0;background:rgba(13,35,61,.55);backdrop-filter:blur(4px);z-index:300;display:none;align-items:center;justify-content:center;padding:20px;}
   .modal-back.show{display:flex;animation:fadeBg .25s ease;}
   @keyframes fadeBg{from{opacity:0;}to{opacity:1;}}
@@ -439,9 +439,9 @@
       <a href="#registry" class="active">📋 ทะเบียนงานบริการ</a>
       <a href="#dashboard">📊 แดชบอร์ดผู้บริหาร</a>
       <a href="#looker">🔗 รายงาน Looker</a>
-      <a class="nav-admin" href="https://script.google.com/a/macros/msu.ac.th/s/AKfycbyx9b4L_ZOjtLE--fUKEVnsi9sIFlrilHRONX3G3fFsDjM9r8OpubmLJTTP7juqBuCLxw/exec" target="_blank" rel="noopener" title="สำหรับผู้ดูแลระบบเท่านั้น"><span>🔐</span> เข้าสู่ระบบผู้ดูแล</a>
-      <a class="nav-qr" href="https://docs.google.com/forms/d/e/1FAIpQLScyGClAdAnwhysYFL5M6BY8cy-SSrKegPAJtYHp0KDZPRstfg/viewform" target="_blank" rel="noopener" title="แบบฟอร์มขอรับบริการโสตทัศนูปกรณ์">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLScyGClAdAnwhysYFL5M6BY8cy-SSrKegPAJtYHp0KDZPRstfg%2Fviewform" alt="QR แบบฟอร์มขอรับบริการ">
+      <a class="nav-admin" href="https://script.google.com/a/macros/msu.ac.th/s/AKfycbz3ryLEOy1BilaqATR1K5wAjt-q6mTzMCrnB680Lg8_mCD2Z6E4jZNV582i0UDe1jJDmA/exec" target="_blank" rel="noopener" title="สำหรับผู้ดูแลระบบเท่านั้น"><span>🔐</span> เข้าสู่ระบบผู้ดูแล</a>
+      <a class="nav-qr" href="https://panya-jeerachat.github.io/dwms/request" target="_blank" rel="noopener" title="แบบฟอร์มขอรับบริการโสตทัศนูปกรณ์">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=https%3A%2F%2Fpanya-jeerachat.github.io%2Fdwms%2Frequest" alt="QR แบบฟอร์มขอรับบริการ">
         <span><span class="t1">แบบฟอร์มขอรับบริการ</span><br><span class="t2">สแกน QR หรือคลิกที่รูป</span></span>
       </a>
     </div>
@@ -511,7 +511,7 @@
   </div>
 </div>
 
-<!-- ============ MODAL / ใบงาน A4 ============ -->
+<!-- ============ MODAL / ใบปะหน้า A4 ============ -->
 <div class="modal-back" id="jobModal" onclick="if(event.target===this)closeJob()">
   <div class="modal" id="jobModalBox"></div>
 </div>
@@ -685,13 +685,13 @@
     <div class="footer-col">
       <h4>DWMS | คณะวิศวกรรมศาสตร์ มมส.</h4>
       <p>ระบบภาระงานเชิงหลักฐานสำหรับนักวิชาการโสตทัศนศึกษา</p>
-      <a class="footer-admin" href="https://script.google.com/a/macros/msu.ac.th/s/AKfycbyx9b4L_ZOjtLE--fUKEVnsi9sIFlrilHRONX3G3fFsDjM9r8OpubmLJTTP7juqBuCLxw/exec" target="_blank" rel="noopener">🔐 เข้าสู่ระบบผู้ดูแล</a>
+      <a class="footer-admin" href="https://script.google.com/a/macros/msu.ac.th/s/AKfycbz3ryLEOy1BilaqATR1K5wAjt-q6mTzMCrnB680Lg8_mCD2Z6E4jZNV582i0UDe1jJDmA/exec" target="_blank" rel="noopener">🔐 เข้าสู่ระบบผู้ดูแล</a>
     </div>
     <div class="footer-col"><h4>ติดต่อเจ้าหน้าที่</h4><p>นายปัญญา จีระฉัตร</p><p>นักวิชาการโสตทัศนศึกษา</p><p>โทรศัพท์: 087-235-9848</p></div>
     <div class="footer-col">
       <h4>ขอรับบริการออนไลน์</h4>
-      <a class="qr-box" href="https://docs.google.com/forms/d/e/1FAIpQLScyGClAdAnwhysYFL5M6BY8cy-SSrKegPAJtYHp0KDZPRstfg/viewform" target="_blank" rel="noopener">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLScyGClAdAnwhysYFL5M6BY8cy-SSrKegPAJtYHp0KDZPRstfg%2Fviewform" alt="QR Code แบบฟอร์มขอรับบริการโสตทัศนูปกรณ์">
+      <a class="qr-box" href="https://panya-jeerachat.github.io/dwms/request" target="_blank" rel="noopener">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data=https%3A%2F%2Fpanya-jeerachat.github.io%2Fdwms%2Frequest" alt="QR Code แบบฟอร์มขอรับบริการโสตทัศนูปกรณ์">
         <span class="qr-text">
           <span class="line1">Scan QR Code หรือ คลิกที่รูป</span>
           <span class="line2">แบบฟอร์มขอรับบริการโสตทัศนูปกรณ์</span>
@@ -708,6 +708,10 @@
 </footer>
 
 <script>
+/* ===== ลิงก์หลักของระบบ (แก้ที่เดียวใช้ได้ทั้งเว็บ) ===== */
+var ADMIN_URL   = "https://script.google.com/a/macros/msu.ac.th/s/AKfycbz3ryLEOy1BilaqATR1K5wAjt-q6mTzMCrnB680Lg8_mCD2Z6E4jZNV582i0UDe1jJDmA/exec";
+var REQUEST_URL = "https://panya-jeerachat.github.io/dwms/request";
+
 var SHEET_ID="1am2WPhKcEzATV4478hIq-5R3Oh81eBk0UvC_cp-ZLTs";
 var GID="1452503207";
 var CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vRielYBsvmmmidy6lcOHtuRcxaUv7cAd5yYCerw2ky4wiKV3TbopZ_KGfxQL6xXXQatfGYBzKSXlrUM/pub?gid=1452503207&single=true&output=csv";
@@ -1175,7 +1179,7 @@ function renderJobModal(r){
 }
 function printJob(){window.print();}
 
-/* ===== บันทึกรูป QR ทันที (ไม่เปิดแท็บใหม่) ===== */
+/* ===== บันทึกรูป QR ทันที ===== */
 function saveBlob(blob,name){
   if(window.navigator&&window.navigator.msSaveOrOpenBlob){window.navigator.msSaveOrOpenBlob(blob,name);return;}
   var u=URL.createObjectURL(blob),a=document.createElement('a');
@@ -1254,7 +1258,18 @@ function checkDeepLink(){
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeJob();});
 
+/* ===== ผูกลิงก์จากตัวแปรกลางให้ทุกจุดอัตโนมัติ ===== */
+function applyGlobalLinks(){
+  document.querySelectorAll('.nav-admin,.footer-admin').forEach(function(a){a.href=ADMIN_URL;});
+  document.querySelectorAll('.nav-qr,.qr-box').forEach(function(a){a.href=REQUEST_URL;});
+  var enc=encodeURIComponent(REQUEST_URL);
+  var navImg=document.querySelector('.nav-qr img'),ftImg=document.querySelector('.qr-box img');
+  if(navImg)navImg.src='https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data='+enc;
+  if(ftImg)ftImg.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=0&data='+enc;
+}
+
 document.addEventListener('DOMContentLoaded',function(){
+  applyGlobalLinks();
   loadTrackingData();loadMonthly();
   setInterval(tickNextSync,1000);
   setInterval(function(){
