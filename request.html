@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>แบบขอรับบริการโสตทัศนูปกรณ์ | คณะวิศวกรรมศาสตร์ มมส.</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+ :root{--bd:#1565C0;--bl:#2196F3;--bp:#E8F4FE}
+ body{font-family:'Sarabun',sans-serif;background:linear-gradient(180deg,#EAF3FD 0%,#f4f8fc 260px);color:#1B2A3A;min-height:100vh}
+ h1,h2,.kanit{font-family:'Kanit',sans-serif}
+ .card{background:#fff;border:1px solid #e1ecf7;border-radius:18px;box-shadow:0 10px 28px rgba(21,101,192,.10)}
+ .btn-primary{background:var(--bd);color:#fff;border-radius:12px;padding:.85rem 1.25rem;font-weight:600;font-size:1rem;transition:.15s;width:100%}
+ .btn-primary:hover{background:#0D47A1}
+ .btn-primary:disabled{opacity:.6}
+ input,select,textarea{border:1px solid #cbd5e1;border-radius:12px;padding:.75rem .9rem;font-size:1rem;width:100%;background:#fff}
+ input:focus,select:focus,textarea:focus{outline:2px solid var(--bl);outline-offset:1px;border-color:var(--bl)}
+ label{font-size:.9rem;color:#334155;font-weight:600;display:block;margin-bottom:.4rem}
+ .req{color:#e11d48}
+ .hidden{display:none!important}
+ .honeypot{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<div class="max-w-lg mx-auto px-4 py-8">
+
+ <!-- Header -->
+ <div class="text-center mb-6">
+  <div class="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-3xl text-white shadow-lg mb-3" style="background:var(--bd)">🎬</div>
+  <h1 class="font-bold text-xl kanit leading-snug" style="color:var(--bd)">แบบขอรับบริการโสตทัศนูปกรณ์</h1>
+  <div class="text-sm text-slate-500 mt-1">คณะวิศวกรรมศาสตร์ มหาวิทยาลัยมหาสารคาม</div>
+  <div class="text-xs text-slate-400 mt-2">📞 0872359848 · นายปัญญา จีระฉัตร เจ้าหน้าที่โสตทัศนศึกษา</div>
+ </div>
+
+ <!-- ══════ ฟอร์ม ══════ -->
+ <div id="formCard" class="card p-6">
+  <div id="formError" class="hidden bg-rose-50 border border-rose-200 text-rose-700 text-sm rounded-xl px-3 py-2 mb-4"></div>
+  <form id="reqForm" onsubmit="return submitRequest(event)">
+   <!-- honeypot: ฟิลด์หลอกกันบอท ผู้ใช้จริงจะมองไม่เห็นและไม่กรอก -->
+   <div class="honeypot" aria-hidden="true">
+    <label>Website</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+   </div>
+
+   <div class="mb-4">
+    <label>วันที่ให้บริการ <span class="req">*</span></label>
+    <input type="date" id="fDate" required>
+    <p class="text-xs text-slate-400 mt-1">ระบบจะบันทึกข้อมูลตามวันที่ให้บริการ</p>
+   </div>
+
+   <div class="mb-4">
+    <label>ประเภทงานบริการ</label>
+    <select id="fType">
+     <option value="">— เลือกประเภทงาน (ไม่บังคับ) —</option>
+     <option>บริการแก้ไขปัญหาเฉพาะหน้าในชั้นเรียนและห้องประชุม</option>
+     <option>สนับสนุนกิจกรรม / ประชุม</option>
+     <option>ดูแลและแก้ไขระบบอินเทอร์เน็ต</option>
+     <option>ดูแลและแก้ไขระบบโทรศัพท์ภายใน</option>
+     <option>ดูแลและแก้ไขระบบสแกนลงเวลาปฏิบัติงานและระบบสิทธิ์เข้าออกห้อง</option>
+     <option>บริการหน่วยงานภายนอก (หน่วยงานในมหาวิทยาลัย/ชุมชน)</option>
+     <option>แก้ไขปัญหาการใช้งานเครื่องคอมพิวเตอร์หรือPrinter</option>
+     <option>ดูแลและแก้ไขระบบ CCTV</option>
+     <option>ดูแลและแก้ไขระบบจอแสดงข่าวประชาสัมพันธ์ภายในคณะ</option>
+     <option>การบำรุงศิลปะวัฒนธรรม</option>
+     <option>การเข้าร่วมกิจกรรมอบรมหรือพัฒนาวิชาชีพ</option>
+     <option>อื่น ๆ</option>
+    </select>
+   </div>
+
+   <div class="mb-4">
+    <label>รายละเอียดงานที่ขอรับบริการ</label>
+    <textarea id="fDetail" rows="3" placeholder="เช่น โปรเจคเตอร์ไม่มีสัญญาณภาพ"></textarea>
+   </div>
+
+   <div class="mb-6">
+    <label>ห้อง/สถานที่ <span class="req">*</span></label>
+    <input id="fRoom" required placeholder="เช่น EN1-109">
+   </div>
+
+   <button type="submit" id="submitBtn" class="btn-primary">ส่งคำขอรับบริการ</button>
+   <p class="text-center text-xs text-slate-400 mt-3">ไม่ต้องเข้าสู่ระบบ ไม่ต้องมีบัญชี Gmail — กรอกแล้วส่งได้ทันที</p>
+  </form>
+ </div>
+
+ <!-- ══════ หน้าขอบคุณหลังส่งสำเร็จ ══════ -->
+ <div id="doneCard" class="card p-8 text-center hidden">
+  <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-3xl mx-auto mb-4">✅</div>
+  <h2 class="font-bold text-lg kanit mb-2" style="color:var(--bd)">ส่งคำขอเรียบร้อยแล้ว</h2>
+  <p class="text-sm text-slate-500 mb-6">ทีมงานโสตทัศนศึกษาได้รับคำขอของท่านแล้ว และจะดำเนินการโดยเร็วที่สุด</p>
+  <button onclick="resetForm()" class="btn-primary" style="width:auto;padding:.7rem 1.5rem">ส่งคำขอเพิ่มเติม</button>
+ </div>
+
+</div>
+
+<script>
+// TODO: แก้เป็น URL ของ Web App หลังสั่ง Deploy (Deploy > Manage deployments)
+// ต้องตั้ง "Who has access" เป็น "Anyone" (ไม่ใช่ "Anyone with Google account")
+// ไม่เช่นนั้นผู้ใช้จะยังถูกบังคับให้ล็อกอิน Gmail เหมือน Google Form เดิม
+const SCRIPT_URL = 'https://script.google.com/macros/s/XXXXXXXXXXXXXXXXXXXXXXXX/exec';
+
+function submitRequest(ev){
+  ev.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const errBox = document.getElementById('formError');
+  errBox.classList.add('hidden');
+
+  const date = document.getElementById('fDate').value;
+  const room = document.getElementById('fRoom').value.trim();
+  if (!date) { showError('กรุณาระบุวันที่ให้บริการ'); return false; }
+  if (!room) { showError('กรุณาระบุห้อง/สถานที่'); return false; }
+
+  const payload = new URLSearchParams({
+    date: date,
+    type: document.getElementById('fType').value,
+    detail: document.getElementById('fDetail').value.trim(),
+    room: room,
+    website: document.getElementById('website').value // honeypot
+  });
+
+  btn.disabled = true; btn.textContent = 'กำลังส่งคำขอ…';
+
+  fetch(SCRIPT_URL, { method: 'POST', body: payload })
+    .then(r => r.json())
+    .then(res => {
+      btn.disabled = false; btn.textContent = 'ส่งคำขอรับบริการ';
+      if (!res.ok) { showError(res.message || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง'); return; }
+      document.getElementById('formCard').classList.add('hidden');
+      document.getElementById('doneCard').classList.remove('hidden');
+    })
+    .catch(() => {
+      btn.disabled = false; btn.textContent = 'ส่งคำขอรับบริการ';
+      showError('เชื่อมต่อระบบไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่อีกครั้ง');
+    });
+  return false;
+}
+
+function showError(msg){
+  const errBox = document.getElementById('formError');
+  errBox.textContent = msg; errBox.classList.remove('hidden');
+  errBox.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function resetForm(){
+  document.getElementById('reqForm').reset();
+  document.getElementById('doneCard').classList.add('hidden');
+  document.getElementById('formCard').classList.remove('hidden');
+}
+</script>
+</body></html>
