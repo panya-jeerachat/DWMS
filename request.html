@@ -85,8 +85,16 @@
  <div id="doneCard" class="card p-8 text-center hidden">
   <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-3xl mx-auto mb-4">✅</div>
   <h2 class="font-bold text-lg kanit mb-2" style="color:var(--bd)">ส่งคำขอเรียบร้อยแล้ว</h2>
-  <p class="text-sm text-slate-500 mb-6">ทีมงานโสตทัศนศึกษาได้รับคำขอของท่านแล้ว และจะดำเนินการโดยเร็วที่สุด</p>
-  <button onclick="resetForm()" class="btn-primary" style="width:auto;padding:.7rem 1.5rem">ส่งคำขอเพิ่มเติม</button>
+  <p class="text-sm text-slate-500 mb-6">ทีมงานโสตทัศนศึกษาได้รับคำขอของท่านแล้ว และจะดำเนินการโดยเร็วที่สุด<br>ท่านสามารถติดตามสถานะคำขอได้จากระบบภาระงานด้านล่าง</p>
+  <div class="flex flex-col gap-2">
+   <a href="https://panya-jeerachat.github.io/dwms/" class="btn-primary inline-block" style="text-decoration:none">📊 ไปที่ระบบภาระงานเชิงหลักฐาน (ตรวจสอบสถานะคำขอ)</a>
+   <button onclick="resetForm()" class="text-sm text-slate-500 underline mt-1">ส่งคำขอเพิ่มเติม</button>
+  </div>
+ </div>
+
+ <!-- ลิงก์กลับระบบหลัก สำหรับผู้ที่แวะมาดูสถานะโดยยังไม่ได้ส่งคำขอใหม่ -->
+ <div class="text-center mt-5">
+  <a href="https://panya-jeerachat.github.io/dwms/" class="text-sm text-slate-500 underline">← กลับไปหน้าระบบภาระงานเชิงหลักฐาน สำหรับนักวิชาการโสตทัศนศึกษา</a>
  </div>
 
 </div>
