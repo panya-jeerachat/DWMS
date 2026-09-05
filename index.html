@@ -155,6 +155,15 @@
   .dl{display:grid;grid-template-columns:112px 1fr;gap:7px 12px;font-size:13px;}
   .dl dt{color:var(--gray-500);font-size:12px;font-weight:600;}
   .dl dd{color:var(--gray-900);word-break:break-word;}
+
+  /* แถบรับรองแบบดิจิทัล (แทนช่องเซ็นชื่อ) */
+  .e-verify{margin-top:13px;border:1.5px solid #BBE3CF;background:linear-gradient(135deg,#E9F7EF,#F5FBF7);border-radius:12px;padding:12px 14px;}
+  .e-verify .ev-t{font-family:'Kanit';font-size:12.5px;font-weight:600;color:var(--green);display:flex;align-items:center;gap:7px;margin-bottom:6px;}
+  .e-verify p{font-size:11.5px;color:var(--gray-700);line-height:1.7;}
+  .e-verify .ev-meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:7px;font-size:11px;color:var(--gray-500);}
+  .e-verify .ev-meta b{color:var(--blue-deep);font-family:'Kanit';font-weight:600;}
+  .paperless{display:inline-flex;align-items:center;gap:6px;background:#DFF3E6;border:1px solid #A9DCBE;color:#1B7A43;font-size:10.5px;font-weight:700;border-radius:11px;padding:2px 9px;margin-top:8px;}
+
   .qr-panel{background:linear-gradient(160deg,#E8F4FE,#F6FBFF);border:1.5px solid var(--blue-light);border-radius:15px;padding:15px;text-align:center;}
   .qr-panel h4{font-family:'Kanit';font-size:13.5px;color:var(--blue-deep);margin-bottom:4px;}
   .qr-panel .qd{font-size:11px;color:var(--gray-700);line-height:1.6;margin-bottom:11px;}
@@ -167,6 +176,7 @@
   .qr-acts button:disabled{opacity:.6;cursor:progress;}
   .live-tag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;color:var(--green);background:var(--green-bg);border-radius:12px;padding:3px 10px;margin-top:10px;line-height:1.5;}
   .live-tag .ldot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.2s infinite;flex-shrink:0;}
+  .print-hint{font-size:10.5px;color:var(--gray-500);margin-top:9px;line-height:1.6;}
 
   /* ============ DASHBOARD ============ */
   .dash{max-width:1300px;margin:0 auto 40px;padding:0 24px;}
@@ -369,8 +379,8 @@
   .footer-bottom a{color:#8ECBFF;}
   @media(max-width:700px){.nav-links{width:100%;justify-content:center;}.qr-box{flex-direction:column;text-align:center;}.bars{height:200px;}}
 
-  /* ================= PRINT : A4 หน้าเดียวจบ ================= */
-  @page{size:A4 portrait;margin:11mm 12mm;}
+  /* ================= PRINT : A4 หน้าเดียวจบ (ไม่มีช่องลงนาม) ================= */
+  @page{size:A4 portrait;margin:12mm 12mm;}
   @media print{
     html,body{background:#fff !important;width:186mm;}
     body>*{display:none !important;}
@@ -381,35 +391,36 @@
     .print-only{display:block !important;}
     .no-print{display:none !important;}
     *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
-    .modal-top{border-radius:0 !important;padding:9pt 12pt !important;}
+    .modal-top{border-radius:0 !important;padding:10pt 13pt !important;}
     .modal-top::before{display:none !important;}
-    .modal-top .org{font-size:8pt !important;}
-    .modal-top h3{font-size:13pt !important;line-height:1.35 !important;}
-    .modal-top .mt-id{font-size:8.5pt !important;margin:4pt 0 !important;padding:1.5pt 8pt !important;}
-    .modal-top .mt-sub{font-size:8.5pt !important;margin-top:2pt !important;}
-    .modal-body{padding:10pt 12pt 8pt !important;}
-    .modal-grid{grid-template-columns:1.45fr .8fr !important;gap:11pt !important;}
-    .track{padding:7pt 9pt !important;margin-bottom:8pt !important;border-radius:5pt !important;}
-    .track-t{font-size:8.5pt !important;margin-bottom:7pt !important;}
-    .steps .cir{width:20pt !important;height:20pt !important;font-size:9pt !important;border-width:1.5pt !important;margin-bottom:3pt !important;animation:none !important;box-shadow:none !important;}
-    .steps .lbl{font-size:7pt !important;}
-    .step::before{top:9.5pt !important;height:2pt !important;}
-    .status-pill{font-size:8pt !important;padding:2pt 7pt !important;}
+    .modal-top .org{font-size:8.2pt !important;}
+    .modal-top h3{font-size:14pt !important;line-height:1.35 !important;}
+    .modal-top .mt-id{font-size:9pt !important;margin:5pt 0 !important;padding:2pt 9pt !important;}
+    .modal-top .mt-sub{font-size:9pt !important;margin-top:3pt !important;}
+    .modal-body{padding:12pt 13pt 10pt !important;}
+    .modal-grid{grid-template-columns:1.42fr .82fr !important;gap:12pt !important;}
+    .track{padding:8pt 10pt !important;margin-bottom:9pt !important;border-radius:5pt !important;}
+    .track-t{font-size:9pt !important;margin-bottom:8pt !important;}
+    .steps .cir{width:22pt !important;height:22pt !important;font-size:10pt !important;border-width:1.6pt !important;margin-bottom:3.5pt !important;animation:none !important;box-shadow:none !important;}
+    .steps .lbl{font-size:7.4pt !important;}
+    .step::before{top:10.5pt !important;height:2pt !important;}
+    .status-pill{font-size:8.4pt !important;padding:2pt 8pt !important;}
     .status-pill .dot{animation:none !important;}
-    .dl{grid-template-columns:64pt 1fr !important;gap:3.5pt 7pt !important;font-size:8.8pt !important;line-height:1.45 !important;}
-    .dl dt{font-size:8.2pt !important;}
-    .cat-badge{font-size:7.5pt !important;padding:1.5pt 6pt !important;}
-    .qr-panel{padding:8pt !important;border-radius:6pt !important;}
-    .qr-panel h4{font-size:9pt !important;}
-    .qr-panel .qd{font-size:7pt !important;margin-bottom:5pt !important;line-height:1.4 !important;}
-    .qr-panel img{width:112pt !important;height:112pt !important;padding:4pt !important;box-shadow:none !important;border:.6pt solid #BBDEFB !important;margin-bottom:5pt !important;}
-    .live-tag{font-size:6.8pt !important;margin-top:4pt !important;padding:1.5pt 6pt !important;}
-    .live-tag .ldot{animation:none !important;}
-    .print-url{font-size:6.6pt !important;color:#4A5B6B !important;word-break:break-all;line-height:1.35;margin-top:4pt;}
-    .print-sign{display:flex !important;justify-content:space-between;gap:16pt;margin-top:9pt;padding-top:7pt;border-top:.8pt dashed #B9C7D4;}
-    .print-sign div{flex:1;text-align:center;font-size:8pt;color:#4A5B6B;line-height:2.4;}
-    .print-sign .ln{border-bottom:.7pt dotted #8A99A8;height:22pt;margin-bottom:3pt;}
-    .print-foot{margin-top:7pt;padding-top:5pt;border-top:.8pt solid #0D47A1;display:flex;justify-content:space-between;font-size:7pt;color:#8A99A8;}
+    .dl{grid-template-columns:66pt 1fr !important;gap:4pt 8pt !important;font-size:9.2pt !important;line-height:1.5 !important;}
+    .dl dt{font-size:8.6pt !important;}
+    .cat-badge{font-size:8pt !important;padding:1.6pt 6.5pt !important;}
+    .e-verify{margin-top:9pt !important;padding:8pt 10pt !important;border-radius:5pt !important;}
+    .e-verify .ev-t{font-size:9pt !important;margin-bottom:4pt !important;}
+    .e-verify p{font-size:8pt !important;line-height:1.55 !important;}
+    .e-verify .ev-meta{font-size:7.6pt !important;margin-top:5pt !important;gap:3pt 12pt !important;}
+    .paperless{font-size:7.4pt !important;margin-top:5pt !important;padding:1.6pt 7pt !important;}
+    .qr-panel{padding:9pt !important;border-radius:6pt !important;}
+    .qr-panel h4{font-size:9.4pt !important;}
+    .qr-panel .qd{font-size:7.4pt !important;margin-bottom:6pt !important;line-height:1.45 !important;}
+    .qr-panel img{width:116pt !important;height:116pt !important;padding:4pt !important;box-shadow:none !important;border:.6pt solid #BBDEFB !important;margin-bottom:6pt !important;}
+    .print-url{font-size:7pt !important;color:#4A5B6B !important;word-break:break-all;line-height:1.4;margin-top:5pt;}
+    .print-foot{margin-top:9pt;padding-top:6pt;border-top:.8pt solid #0D47A1;display:flex;justify-content:space-between;gap:10pt;font-size:7.2pt;color:#8A99A8;}
+    .print-foot span:last-child{text-align:right;}
   }
 </style>
 </head>
@@ -468,7 +479,7 @@
       </div>
     </div>
 
-    <div class="hint-bar">📱 <b>คลิกที่รายการใดก็ได้</b> เพื่อดูรายละเอียดฉบับเต็ม · พิมพ์ใบงาน A4 หน้าเดียว · และรับ <b>QR Code ติดตามสถานะแบบเรียลไทม์</b> สำหรับผู้รับบริการ</div>
+    <div class="hint-bar">📱 <b>คลิกที่รายการใดก็ได้</b> เพื่อดูรายละเอียดฉบับเต็ม · รับ <b>QR ติดตามสถานะเรียลไทม์</b> · และพิมพ์ <b>ใบปะหน้า A4</b> ไว้ประกอบหลักฐานเมื่อจำเป็นเท่านั้น (ระบบปิดงานด้วยหลักฐานดิจิทัล ไม่ต้องลงนามกระดาษ)</div>
 
     <div class="chip-row" id="chipRow"></div>
 
@@ -1090,7 +1101,7 @@ function exportCSV(){
   saveBlob(new Blob([csv],{type:"text/csv;charset=utf-8;"}),"DWMS_ทะเบียนงานบริการ_"+new Date().toISOString().slice(0,10)+".csv");
 }
 
-/* ===== POP-UP / ใบงาน + QR ===== */
+/* ===== POP-UP / ใบปะหน้า + QR ===== */
 function trackURL(no){return location.origin+location.pathname+'?job='+encodeURIComponent(no);}
 function qrURL(no,size){return 'https://api.qrserver.com/v1/create-qr-code/?size='+size+'x'+size+'&margin=0&data='+encodeURIComponent(trackURL(no));}
 function openJob(no){
@@ -1117,7 +1128,7 @@ function renderJobModal(r){
 
   document.getElementById('jobModalBox').innerHTML=
   '<div class="modal-top"><div>'+
-    '<div class="org">คณะวิศวกรรมศาสตร์ มหาวิทยาลัยมหาสารคาม · ใบงานบริการโสตทัศนูปกรณ์ (DWMS)</div>'+
+    '<div class="org">คณะวิศวกรรมศาสตร์ มหาวิทยาลัยมหาสารคาม · ใบปะหน้างานบริการโสตทัศนูปกรณ์ (DWMS)</div>'+
     '<span class="mt-id">'+r.no+'</span>'+
     '<h3>'+esc(r.detail)+'</h3>'+
     '<div class="mt-sub">'+esc(r.type)+' · '+esc(r.room)+' · '+esc(r.date)+'</div>'+
@@ -1136,10 +1147,11 @@ function renderJobModal(r){
       '<dt>หมายเหตุ</dt><dd>'+esc(r.note)+'</dd>'+
       '<dt>ผู้ให้บริการ</dt><dd>นายปัญญา จีระฉัตร · นักวิชาการโสตทัศนศึกษา · โทร. 087-235-9848</dd>'+
     '</dl>'+
-    '<div class="print-sign print-only" style="display:none;">'+
-      '<div><div class="ln"></div>ผู้รับบริการ / ผู้ขอใช้บริการ</div>'+
-      '<div><div class="ln"></div>ผู้ปฏิบัติงาน (นักวิชาการโสตทัศนศึกษา)</div>'+
-      '<div><div class="ln"></div>หัวหน้างาน / ผู้ตรวจสอบ</div>'+
+    '<div class="e-verify">'+
+      '<div class="ev-t">🔏 การรับรองผลการปฏิบัติงานแบบดิจิทัล</div>'+
+      '<p>รายการนี้บันทึกและปิดสถานะผ่านระบบ DWMS ซึ่งจัดเก็บหลักฐานอิเล็กทรอนิกส์ไว้ในฐานข้อมูลกลางแล้ว <b>จึงไม่ต้องลงนามรับรองบนกระดาษ</b> · ผู้ตรวจสอบสามารถยืนยันความถูกต้องได้จากสถานะเรียลไทม์ผ่าน QR ด้านขวา</p>'+
+      '<div class="ev-meta"><span>เลขอ้างอิงระบบ: <b>'+r.no+'</b></span><span>บันทึกโดยระบบเมื่อ: <b>'+esc(r.ts)+'</b></span><span>สถานะล่าสุด: <b>'+st.label+'</b></span></div>'+
+      '<span class="paperless">🌱 PAPERLESS · เอกสารฉบับพิมพ์ใช้เป็นใบปะหน้า/หลักฐานประกอบเท่านั้น</span>'+
     '</div>'+
     '</div>'+
     '<div class="qr-panel">'+
@@ -1149,14 +1161,15 @@ function renderJobModal(r){
       '<div class="qr-acts no-print">'+
         '<button class="primary" id="btnQR" onclick="downloadQR(\''+r.no+'\')">⬇ บันทึกรูป QR</button>'+
         '<button onclick="copyTrack(\''+r.no+'\')">🔗 คัดลอกลิงก์ติดตาม</button>'+
-        '<button onclick="printJob()">🖨️ พิมพ์ใบงาน (A4 หน้าเดียว)</button>'+
+        '<button onclick="printJob()">🖨️ พิมพ์ใบปะหน้า (A4 หน้าเดียว)</button>'+
       '</div>'+
       '<span class="live-tag no-print"><span class="ldot"></span> อัปเดตอัตโนมัติทุก 5 นาที · หยุดชั่วคราวขณะเปิดหน้านี้</span>'+
-      '<div class="print-url print-only" style="display:none;">ลิงก์ติดตาม: '+esc(url)+'</div>'+
+      '<div class="print-hint no-print">พิมพ์เฉพาะกรณีต้องแนบเป็นหลักฐานประกอบ เช่น เอกสารเบิกจ่ายหรือแฟ้มตรวจประเมิน</div>'+
+      '<div class="print-url print-only" style="display:none;">ตรวจสอบสถานะออนไลน์: '+esc(url)+'</div>'+
     '</div></div>'+
     '<div class="print-foot print-only" style="display:none;">'+
-      '<span>DWMS · ระบบภาระงานเชิงหลักฐาน คณะวิศวกรรมศาสตร์ มมส.</span>'+
-      '<span>พิมพ์เมื่อ '+today+' · เอกสารนี้สร้างอัตโนมัติจากระบบ</span>'+
+      '<span>DWMS · ระบบภาระงานเชิงหลักฐาน คณะวิศวกรรมศาสตร์ มมส. · หลักฐานหลักจัดเก็บในรูปแบบดิจิทัล</span>'+
+      '<span>พิมพ์เมื่อ '+today+'<br>เอกสารสร้างอัตโนมัติจากระบบ ไม่ต้องลงนาม</span>'+
     '</div>'+
   '</div>';
 }
@@ -1184,7 +1197,6 @@ function downloadQR(no){
       });
     })
     .catch(function(){
-      /* สำรอง: ดาวน์โหลดตรงผ่าน a[download] */
       try{
         var a=document.createElement('a');a.href=qrURL(no,560);a.download='DWMS_QR_'+no+'.png';
         a.style.display='none';document.body.appendChild(a);a.click();
@@ -1192,7 +1204,6 @@ function downloadQR(no){
       }catch(e){done();alert('ไม่สามารถบันทึกไฟล์ได้ กรุณากดค้าง/คลิกขวาที่รูป QR แล้วเลือก "บันทึกรูปภาพ"');}
     });
 }
-/* ประกอบการ์ด QR พร้อมข้อความ แล้วคืนค่าเป็น Blob */
 function composeQRCard(qrBlob,r){
   return new Promise(function(resolve,reject){
     var img=new Image(),url=URL.createObjectURL(qrBlob);
@@ -1246,7 +1257,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeJob();}
 document.addEventListener('DOMContentLoaded',function(){
   loadTrackingData();loadMonthly();
   setInterval(tickNextSync,1000);
-  /* อัปเดตอัตโนมัติทุก 5 นาที — ข้ามรอบถ้ากำลังเปิดดูรายละเอียดงาน */
   setInterval(function(){
     if(isSyncing)return;
     if(openJobId){nextSyncAt=Date.now()+AUTO_MS;return;}
